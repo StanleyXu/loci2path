@@ -13,5 +13,4 @@
 #' @export
 #' @examples
 #' data(egquery.demo)
-#' #tobe added
 "egquery.demo"
