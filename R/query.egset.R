@@ -5,12 +5,11 @@
 #' @param query.score optional, set to NULL if the regions are not ordered.
 #' @param eqtl.set an eqtlSet object; the eQTL set to be queried against
 #' @param gene.set an object of geneSet class; the gene set to be tested
-#' @param lr bool; whether to perform logistic regression
 #' @param verbose bool; whether to show eqtlSet/geneSet summary information; default is F
 #' @export
 #' @examples
 #' #to be added
-query.egset=function(query.gr, query.score, eqtl.set, gene.set, lr=T, verbose=F){
+query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   ## check gene id compatibility
   comp=check.geneid(eqtl.set, gene.set)
   if(comp[3]==0){
@@ -34,7 +33,7 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, lr=T, verbose=F)
   res=NULL
   ## query one.set, loop across all sets
   res.list=lapply(gene.set@gene.set, FUN=function(x)
-    query.one.set(query.gr, query.score, eqtl.set, x, lr=lr, q.all, n.snp.t))
+    query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t))
   ## organize result
   res=data.frame(names(gene.set@gene.set), matrix(unlist(res.list), ncol=9, byrow = T))
   colnames(res)=c(

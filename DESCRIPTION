@@ -10,5 +10,5 @@ License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
 Depends: GenomicRanges
-Imports: gam, pheatmap
+Imports: gam, pheatmap, wordcloud
 RoxygenNote: 6.0.1.9000

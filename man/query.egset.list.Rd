@@ -4,7 +4,7 @@
 \alias{query.egset.list}
 \title{Query enrichment in geneset through multiple eQTL sets.}
 \usage{
-query.egset.list(query.gr, query.score, eqtl.set.list, gene.set, lr = T)
+query.egset.list(query.gr, query.score, eqtl.set.list, gene.set)
 }
 \arguments{
 \item{query.gr}{a GenomicRange object, representing query regions}

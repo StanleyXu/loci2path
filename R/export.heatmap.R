@@ -1,7 +1,7 @@
 #' Export heatmap to file
 #'
 #' This function exports the enrichment heatmap to a specific file using pheatmap package.
-#' @param mat query result from function query.egset.list()
+#' @param mat query result matrix from function \code{get.heat.mat()}
 #' @param file path to the image file
 #' @param main title of the heatmap, default is ""
 #' @param silent bool; whether to show heatmap to current display device; default is T

@@ -7,7 +7,7 @@
 export.heatmap(mat, file, main = "", silent = T)
 }
 \arguments{
-\item{mat}{query result from function query.egset.list()}
+\item{mat}{query result matrix from function \code{get.heat.mat()}}
 
 \item{file}{path to the image file}
 

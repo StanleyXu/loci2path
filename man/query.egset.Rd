@@ -4,7 +4,7 @@
 \alias{query.egset}
 \title{Query enrichment in geneset through one eQTL set.}
 \usage{
-query.egset(query.gr, query.score, eqtl.set, gene.set, lr = T, verbose = F)
+query.egset(query.gr, query.score, eqtl.set, gene.set, verbose = F)
 }
 \arguments{
 \item{query.gr}{a GenomicRange object, representing query regions}
@@ -14,8 +14,6 @@ query.egset(query.gr, query.score, eqtl.set, gene.set, lr = T, verbose = F)
 \item{eqtl.set}{an eqtlSet object; the eQTL set to be queried against}
 
 \item{gene.set}{an object of geneSet class; the gene set to be tested}
-
-\item{lr}{bool; whether to perform logistic regression}
 
 \item{verbose}{bool; whether to show eqtlSet/geneSet summary information; default is F}
 }

@@ -1,5 +1,5 @@
 
-query.one.set=function(query.gr, query.score, eqtl.set, set.j, lr=T, q.all, n.snp.t){
+query.one.set=function(query.gr, query.score=NULL, eqtl.set, set.j, q.all, n.snp.t){
   snp.set.j.ix=which(eqtl.set@gene %in% set.j)
   snp.set.j.gr=eqtl.set@snp.gr[snp.set.j.ix] # gr of eQTL associated with genes within geneset j
   # intialize pval for all tests as 1
@@ -19,7 +19,7 @@ query.one.set=function(query.gr, query.score, eqtl.set, set.j, lr=T, q.all, n.sn
 
     ## (1) Logistic Regression, use 0/1 as Y
     pval.lr=NA
-    if(lr==T){
+    if(!(is.null(query.score))){
 
       o.q=as.data.frame(over.j)$queryHits;
       y=rep(0, length(query.gr)); y[o.q]=1

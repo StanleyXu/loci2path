@@ -11,14 +11,14 @@
 #' @export
 #' @examples
 #' #to be added
-query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set, lr=T){
+query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set){
   ts=names(eqtl.set.list)
   tl=length(ts)
   cat(paste0("Start query: ", tl, " eqtl Sets...\n"))
   res=NULL
   for(i in 1:tl){
     cat(paste0(i, " of ", tl, ": ",ts[i], "...\n"))
-    one.t=query.egset(query.gr=query.gr, query.score=query.score, eqtl.set=eqtl.set.list[[i]], gene.set=gene.set, lr=lr)
+    one.t=query.egset(query.gr=query.gr, query.score=query.score, eqtl.set=eqtl.set.list[[i]], gene.set=gene.set)
     if(nrow(one.t)>0){
       res=rbind(res,data.frame(tissue=ts[i], one.t))
     }

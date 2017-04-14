@@ -1,4 +1,4 @@
 exportPattern("^[[:alpha:]]+")
-import(gam, pheatmap)
+import(gam, pheatmap, wordcloud)
 importFrom("grDevices", "colorRampPalette")
 importFrom("stats", "fisher.test", "phyper", "quantile")
