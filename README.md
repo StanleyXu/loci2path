@@ -1,5 +1,10 @@
 # egquery
-eQTL-geneset query with ordered regions
+# eQTL-geneset query with ordered regions
+
+
+library(devtools)
+install_github("StanleyXu/egquery")
+library(egquery)
 
 
 #show query region
