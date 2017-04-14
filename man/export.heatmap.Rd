@@ -4,7 +4,7 @@
 \alias{export.heatmap}
 \title{Export heatmap to file}
 \usage{
-export.heatmap(mat, file, main = "")
+export.heatmap(mat, file, main = "", silent = T)
 }
 \arguments{
 \item{mat}{query result from function query.egset.list()}
@@ -12,11 +12,15 @@ export.heatmap(mat, file, main = "")
 \item{file}{path to the image file}
 
 \item{main}{title of the heatmap, default is ""}
+
+\item{silent}{bool; whether to show heatmap to current display device; default is T}
 }
 \description{
 This function exports the enrichment heatmap to a specific file using pheatmap package.
 }
 \examples{
-export.heatmap(mat, file="result.heatmap.png", main="enrichment between tissue/pathway")
+result=query.egset.list(query.gr=query.gr, query.score=NULL, eqtl.set=eqtl.set.list, gene.set=biocarta, lr=F)
+mat=get.heat.mat(result, test.method = "fisher")
+export.heatmap(mat, file="result.heatmap.png", main="enrichment between tissue/pathway", silent=T)
 }
 \keyword{heatmap}
