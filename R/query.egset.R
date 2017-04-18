@@ -1,6 +1,6 @@
 #' Query enrichment in geneset through one eQTL set.
 #'
-#' This function perform enrichment test between one eQTL set and one gene set
+#' This function perform enrichment test between one eQTL set and a group of gene sets
 #' @param query.gr a GenomicRange object, representing query regions
 #' @param query.score optional, set to NULL if the regions are not ordered.
 #' @param eqtl.set an eqtlSet object; the eQTL set to be queried against
