@@ -26,16 +26,19 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   ## get total snp number
   snp.gr=eqtl.set@snp.gr
   n.snp.t=length(snp.gr)
+  ## get total gene number
+  gene.all=gene.set@total.number.gene
   ## overlapping between query regions and all snps
   over.all=findOverlaps(query.gr, snp.gr)
   q.all=length(unique(as.data.frame(over.all)$subjectHits))
+  gene.q=length(unique(eqtl.set@gene[as.data.frame(over.all)$subjectHits]))
   #init
   res=NULL
   ## query one.set, loop across all sets
   res.list=lapply(gene.set@gene.set, FUN=function(x)
-    query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t))
+    query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t, gene.all, gene.q))
   ## organize result
-  res=data.frame(names(gene.set@gene.set), matrix(unlist(res.list), ncol=9, byrow = T))
+  res=data.frame(names(gene.set@gene.set), matrix(unlist(res.list), ncol=16, byrow = T), stringsAsFactors = F)
   colnames(res)=c(
     "name_pthw",
     "genes_pthw",
@@ -46,8 +49,16 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
     "log_ratio",
     "pval_lr",
     "pval_fisher",
-    "pval_hypergeom")
-  res=res[which(rowSums(is.na(res))<9),]
+    "pval_hypergeom",
+    "num_gene_set",#gene.j,  num of gene in current geneset
+    "num_gene_query", # gene.q, # number of genes associated with SNPs overlapped by query region
+    "num_gene_hit", #gene.jq, # number of genes hit
+    "gene_hit", #gene.hit, # display hit gene ids
+    "log_ratio_gene", #log.ratio.gene, # log ratio based on gene numbers
+    "pval_fisher_gene", #pval.fisher.gene,
+    "pval_hypergeom_gene" #pval.hypergeom.gene
+    )
+  res=res[which(rowSums(is.na(res))<16),]
 
   res
 }

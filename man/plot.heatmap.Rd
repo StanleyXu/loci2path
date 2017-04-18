@@ -4,7 +4,7 @@
 \alias{plot.heatmap}
 \title{Generate heatmap of enrichment matrix}
 \usage{
-plot.heatmap(mat, file, main = "", silent = T)
+plot.heatmap(mat, main = "", silent = T)
 }
 \arguments{
 \item{mat}{query result matrix from function \code{get.heat.mat()}}

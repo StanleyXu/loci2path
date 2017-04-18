@@ -30,7 +30,7 @@ query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set){
   if(sum(is.na(res$pval_lr))==0){## sort by lr p-value
     res=res[order(res$pval_lr),]
   }else{
-    res=res[order(res$pval_fisher),]
+    res=res[order(res$pval_fisher_gene),]
   }
 
   cat(paste0("\ndone!\n"))

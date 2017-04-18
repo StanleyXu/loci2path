@@ -9,14 +9,15 @@ eqtlSet(object)
 \description{
 eqtlSet Class contains information for eqtl-gene association, gene identifier, position of SNPs, etc.
 }
-\details{
+\section{Slots}{
+
 \describe{
-   \item{tissue}{character; name of the cell/tissue of the eQTL study.}
+\item{\code{tissue}}{character; name of the cell/tissue of the eQTL study}
 
-\item{snp.id}{character; name of the SNPs}
+\item{\code{snp.id}}{character; name of the SNPs}
 
-\item{snp.gr}{GenomicRanges; position of the SNPs}
+\item{\code{snp.gr}}{GenomicRanges; position of the SNPs}
 
-\item{gene}{character; gene identifier}
- }
-}
+\item{\code{gene}}{character; gene identifier}
+}}
+
