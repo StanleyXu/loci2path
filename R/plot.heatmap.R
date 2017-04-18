@@ -10,7 +10,7 @@
 #'   eqtl.set=eqtl.set.list, gene.set=biocarta)
 #' mat=get.heat.mat(result, test.method = "fisher")
 #' plot.heatmap(mat, main="enrichment between tissue/pathway")
-plot.heatmap=function(mat, file, main="", silent=T){
+plot.heatmap=function(mat, main="", silent=T){
   mat=-log(mat)
   mc=max(mat[-which(is.infinite(mat))]) + 100
   mat[which(is.infinite(mat))]=mc
@@ -24,7 +24,7 @@ plot.heatmap=function(mat, file, main="", silent=T){
               cellwidth = 10, cellheight = 4, fontsize_row = 4, fontsize_col=6,
               breaks=breaks,color=color,
               legend=F,
-              main=main, filename = file
+              main=main
  )
   #grid.text("ylabel example", x=0.5, rot=90, gp=gpar(fontsize=10))
 }

@@ -21,5 +21,6 @@ plot.wordcloud=function(mat, min.freq.tissue=5, min.freq.gset=5, max.words=50){
   wordcloud(words = names(tissue), freq = tissue, min.freq = min.freq.tissue,
             max.words=max.words, random.order=FALSE, rot.per=0,
             colors=brewer.pal(8, "Dark2"), scale=c(0.8,0.5))
+  par(mfrow=c(1,1))
 }
 
