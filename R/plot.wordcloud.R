@@ -7,9 +7,10 @@
 #' @keywords word cloud
 #' @export
 #' @examples
-#' result=query.egset.list(query.gr=query.gr, query.score=NULL, eqtl.set=eqtl.set.list, gene.set=biocarta, lr=F)
+#' result=query.egset.list(query.gr=query.gr, query.score=NULL,
+#'   eqtl.set=eqtl.set.list, gene.set=biocarta)
 #' mat=get.heat.mat(result, test.method = "fisher")
-#' export.wordcloud(mat)
+#' plot.wordcloud(mat, min.freq.tissue=5, min.freq.gset=5, max.words=50)
 plot.wordcloud=function(mat, min.freq.tissue=5, min.freq.gset=5, max.words=50){
   pthw=sort(table(as.character(result$name_pthw)), decreasing = T)
   tissue=sort(table(as.character(result$tissue)), decreasing = T)

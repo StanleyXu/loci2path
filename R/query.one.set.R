@@ -1,4 +1,15 @@
-
+#' Query enrichment in geneset through one eQTL set and one gene set
+#'
+#' This function perform enrichment test between one eQTL set and one gene set
+#' @param query.gr a GenomicRange object, representing query regions
+#' @param query.score optional, set to NULL if the regions are not ordered.
+#' @param eqtl.set an eqtlSet object; the eQTL set to be queried against
+#' @param set.j a character vector; a set of genes
+#' @param q.all integer
+#' @param n.snp.t integer
+#' @export
+#' @examples
+#' #to be added
 query.one.set=function(query.gr, query.score=NULL, eqtl.set, set.j, q.all, n.snp.t){
   snp.set.j.ix=which(eqtl.set@gene %in% set.j)
   snp.set.j.gr=eqtl.set@snp.gr[snp.set.j.ix] # gr of eQTL associated with genes within geneset j

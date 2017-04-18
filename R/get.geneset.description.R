@@ -5,6 +5,8 @@
 #' @param geneset.ids Character; the names of the gene sets.
 #' @export
 #' @examples
+#' result=query.egset.list(query.gr=query.gr, query.score=NULL,
+#'   eqtl.set=eqtl.set.list, gene.set=biocarta)
 #' get.geneset.description(biocarta, geneset.ids=result$name_pthw)
 get.geneset.description=function(geneset, geneset.ids){
   ix=match(geneset.ids, names(geneset@gene.set))

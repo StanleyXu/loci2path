@@ -18,9 +18,10 @@ plot.wordcloud(mat, min.freq.tissue = 5, min.freq.gset = 5,
 This function plot the enrichment heatmap to a specific file using pheatmap package.
 }
 \examples{
-result=query.egset.list(query.gr=query.gr, query.score=NULL, eqtl.set=eqtl.set.list, gene.set=biocarta, lr=F)
+result=query.egset.list(query.gr=query.gr, query.score=NULL,
+  eqtl.set=eqtl.set.list, gene.set=biocarta)
 mat=get.heat.mat(result, test.method = "fisher")
-export.wordcloud(mat)
+plot.wordcloud(mat, min.freq.tissue=5, min.freq.gset=5, max.words=50)
 }
 \keyword{cloud}
 \keyword{word}

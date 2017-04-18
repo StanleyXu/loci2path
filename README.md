@@ -21,7 +21,7 @@ head(result)
 mat=get.heat.mat(result, test.method = "fisher")
 
 #plot heatmap
-export.heatmap(mat, file="test.png")
+plot.heatmap(mat)
 
 #plot word cloud
 plot.wordcloud(result)

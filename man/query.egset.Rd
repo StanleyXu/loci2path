@@ -18,7 +18,7 @@ query.egset(query.gr, query.score, eqtl.set, gene.set, verbose = F)
 \item{verbose}{bool; whether to show eqtlSet/geneSet summary information; default is F}
 }
 \description{
-This function perform enrichment test between one eQTL set and one gene set
+This function perform enrichment test between one eQTL set and a group of gene sets
 }
 \examples{
 #to be added

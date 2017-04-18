@@ -16,6 +16,8 @@ This function extracts the enrichment p-value distribution from eQTL list query 
 P-values from different tissues/cell types are organized, and QQ-plot is generated against uniform distribution
 }
 \examples{
-plot.pval.distribution(res, test.method="fisher")
+result=query.egset.list(query.gr=query.gr, query.score=NULL,
+  eqtl.set=eqtl.set.list, gene.set=biocarta)
+plot.pval.distribution(result, test.method="fisher")
 }
 \keyword{result}

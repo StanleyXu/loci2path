@@ -15,5 +15,7 @@ get.geneset.description(geneset, geneset.ids)
 This function extracts the gene set description from geneSet object.
 }
 \examples{
+result=query.egset.list(query.gr=query.gr, query.score=NULL,
+  eqtl.set=eqtl.set.list, gene.set=biocarta)
 get.geneset.description(biocarta, geneset.ids=result$name_pthw)
 }

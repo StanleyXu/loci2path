@@ -18,7 +18,8 @@ query.egset.list(query.gr, query.score, eqtl.set.list, gene.set)
 \description{
 This is the main function for query. The user need to specify
 - (1) Query region; if it is ordered, together with the Query score based on which the regions are ranked
-- (2) eQTL set list; this is usually more than one eQTL set. Only multiple eQTL set derived from different cells/tissues will show cell/tissue specificity
+- (2) eQTL set list; this is usually more than one eQTL set.
+      Only multiple eQTL set derived from different cells/tissues will show cell/tissue specificity
 - (3) gene set; the gene sets that enrichment tests would be performed to.
 }
 \examples{

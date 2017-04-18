@@ -2,7 +2,8 @@
 #'
 #' This is the main function for query. The user need to specify
 #' - (1) Query region; if it is ordered, together with the Query score based on which the regions are ranked
-#' - (2) eQTL set list; this is usually more than one eQTL set. Only multiple eQTL set derived from different cells/tissues will show cell/tissue specificity
+#' - (2) eQTL set list; this is usually more than one eQTL set.
+#'       Only multiple eQTL set derived from different cells/tissues will show cell/tissue specificity
 #' - (3) gene set; the gene sets that enrichment tests would be performed to.
 #' @param query.gr a GenomicRange object, representing query regions
 #' @param query.score optional, set to NULL if the regions are not ordered.
@@ -18,7 +19,8 @@ query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set){
   res=NULL
   for(i in 1:tl){
     cat(paste0(i, " of ", tl, ": ",ts[i], "...\n"))
-    one.t=query.egset(query.gr=query.gr, query.score=query.score, eqtl.set=eqtl.set.list[[i]], gene.set=gene.set)
+    one.t=query.egset(query.gr=query.gr, query.score=query.score,
+                      eqtl.set=eqtl.set.list[[i]], gene.set=gene.set)
     if(nrow(one.t)>0){
       res=rbind(res,data.frame(tissue=ts[i], one.t))
     }
