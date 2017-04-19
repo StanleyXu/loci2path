@@ -29,7 +29,7 @@ query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set){
   #stop if nothing hit
   if(is.null(res)){
     message("There's no enrichment detected")
-    break
+    return(res)
   }
   #reorder res
   if(sum(is.na(res$pval_lr))==0){## sort by lr p-value
