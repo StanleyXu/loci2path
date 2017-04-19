@@ -40,32 +40,33 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   )
   ## remove NA
   res.list=res.list[-which(is.na(res.list))]
-  tt=NULL
-  for(i in 1:length(res.list)){
-    tt=rbind(tt, res.list[[i]])
-  }
-  ## organize result
-  res=data.frame(names(res.list), tt, stringsAsFactors = F)
-  colnames(res)=c(
-    "name_pthw",
-    "genes_pthw",
-    "eQTL_pthw",
-    "eQTL_total_tissue",
-    "eQTL_query",
-    "eQTL_pthw_query",
-    "log_ratio",
-    "pval_lr",
-    "pval_fisher",
-    "pval_hypergeom",
-    "num_gene_set",#gene.j,  num of gene in current geneset
-    "num_gene_query", # gene.q, # number of genes associated with SNPs overlapped by query region
-    "num_gene_hit", #gene.jq, # number of genes hit
-    "gene_hit", #gene.hit, # display hit gene ids
-    "log_ratio_gene", #log.ratio.gene, # log ratio based on gene numbers
-    "pval_fisher_gene", #pval.fisher.gene,
-    "pval_hypergeom_gene" #pval.hypergeom.gene
+  if(length(res.list)>0){
+    tt=NULL
+    for(i in 1:length(res.list)){
+      tt=rbind(tt, res.list[[i]])
+    }
+    ## organize result
+    res=data.frame(names(res.list), tt, stringsAsFactors = F)
+    colnames(res)=c(
+      "name_pthw",
+      "genes_pthw",
+      "eQTL_pthw",
+      "eQTL_total_tissue",
+      "eQTL_query",
+      "eQTL_pthw_query",
+      "log_ratio",
+      "pval_lr",
+      "pval_fisher",
+      "pval_hypergeom",
+      "num_gene_set",#gene.j,  num of gene in current geneset
+      "num_gene_query", # gene.q, # number of genes associated with SNPs overlapped by query region
+      "num_gene_hit", #gene.jq, # number of genes hit
+      "gene_hit", #gene.hit, # display hit gene ids
+      "log_ratio_gene", #log.ratio.gene, # log ratio based on gene numbers
+      "pval_fisher_gene", #pval.fisher.gene,
+      "pval_hypergeom_gene" #pval.hypergeom.gene
     )
-  res=res[which(rowSums(is.na(res))<16),]
+  }
 
   res
 }
