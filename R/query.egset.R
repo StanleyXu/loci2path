@@ -35,10 +35,17 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   #init
   res=NULL
   ## query one.set, loop across all sets
-  res.list=lapply(gene.set@gene.set, FUN=function(x)
-    query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t, gene.all, gene.q))
+  res.list=lapply(gene.set@gene.set, FUN=function(x){
+    query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t, gene.all, gene.q)}
+  )
+  ## remove NA
+  res.list=res.list[-which(is.na(res.list))]
+  tt=NULL
+  for(i in 1:length(res.list)){
+    tt=rbind(tt, res.list[[i]])
+  }
   ## organize result
-  res=data.frame(names(gene.set@gene.set), matrix(unlist(res.list), ncol=16, byrow = T), stringsAsFactors = F)
+  res=data.frame(names(res.list), tt, stringsAsFactors = F)
   colnames(res)=c(
     "name_pthw",
     "genes_pthw",

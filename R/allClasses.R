@@ -28,7 +28,7 @@ eqtlSet <- setClass("eqtlSet",
 #' @slot description vector of character; additional information for gene sets,
 #'       such as names, URLs, a short description, etc.
 #' @slot gene.set list;  a list of gene sets; each member of the list is a vector
-#'       containing a group of gene identifiers}
+#'       containing a group of gene identifiers
 #' @name geneSet
 #' @rdname geneSet
 #' @exportClass geneSet

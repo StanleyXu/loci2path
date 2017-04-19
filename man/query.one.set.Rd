@@ -5,7 +5,7 @@
 \title{Query enrichment in geneset through one eQTL set and one gene set}
 \usage{
 query.one.set(query.gr, query.score = NULL, eqtl.set, set.j, q.all, n.snp.t,
-  n.gene.all)
+  gene.all, gene.q)
 }
 \arguments{
 \item{query.gr}{a GenomicRange object, representing query regions}

@@ -9,11 +9,16 @@ geneSet(object)
 \description{
 geneSet Class contains information for names of gene sets and a list of gene sets
 }
-\details{
+\section{Slots}{
+
 \describe{
-   \item{description}{character; additional information for gene sets, such as names, URLs, a short description, etc.}
+\item{\code{total.number.gene}}{numeric; the total number of all genes;
+This number is used in enrichment tests}
 
-\item{gene.set}{list; a list of gene sets; each member of the list is a vector containing a group of gene identifiers}
+\item{\code{description}}{vector of character; additional information for gene sets,
+such as names, URLs, a short description, etc.}
 
-}
-}
+\item{\code{gene.set}}{list;  a list of gene sets; each member of the list is a vector
+containing a group of gene identifiers}
+}}
+

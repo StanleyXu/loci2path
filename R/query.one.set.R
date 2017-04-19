@@ -14,7 +14,8 @@ query.one.set=function(query.gr, query.score=NULL, eqtl.set, set.j, q.all, n.snp
   snp.set.j.ix=which(eqtl.set@gene %in% set.j)
   snp.set.j.gr=eqtl.set@snp.gr[snp.set.j.ix] # gr of eQTL associated with genes within geneset j
   # intialize pval for all tests as 1
-  res=rep(NA,16)
+  #res=rep(NA,16)
+  res=NA
 
   # check overlapping relationship
   over.j=findOverlaps(query.gr, snp.set.j.gr)

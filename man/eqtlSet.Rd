@@ -7,7 +7,8 @@
 eqtlSet(object)
 }
 \description{
-eqtlSet Class contains information for eqtl-gene association, gene identifier, position of SNPs, etc.
+eqtlSet Class contains information for eqtl-gene association, gene identifier,
+position of SNPs, etc.
 }
 \section{Slots}{
 
