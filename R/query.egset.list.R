@@ -32,7 +32,7 @@ query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set){
   }else{
     res=res[order(res$pval_fisher_gene),]
   }
-
+  rownames(res)=NULL
   cat(paste0("\ndone!\n"))
 
   res
