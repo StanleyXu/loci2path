@@ -49,7 +49,7 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
     res=data.frame(names(res.list), tt, stringsAsFactors = F)
     colnames(res)=c(
       "name_pthw",
-      "genes_pthw",
+      #"genes_pthw", #removed; duplicate with num_gene_set
       "eQTL_pthw",
       "eQTL_total_tissue",
       "eQTL_query",

@@ -69,7 +69,7 @@ query.one.set=function(query.gr, query.score=NULL, eqtl.set, set.j, q.all, n.snp
     pval.hypergeom.gene=phyper(gene.jq, gene.j, gene.all, gene.q, lower.tail = F)
     ## (4) combine results:
     res=data.frame(
-      length(set.j), # num of genes
+      #length(set.j), # num of genes #removed; duplicate with gene.j
       j.all, # num of SNPs associated with gene
       n.snp.t, # num of all GWAS snps in the tissue
       q.all, # num of eQTL overlapping with query region
