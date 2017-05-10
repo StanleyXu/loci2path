@@ -18,6 +18,8 @@ head(result)
 #query tissue specificity
 gr.tissue=query.tissue(query.gr, eqtl.set.list=eqtl.set.list)
 
+#reorder result by tissue specificity
+result2=order.by.tissue(result, tissue.list = rownames(gr.tissue))
 
 #extract tissue/geneset matrix
 mat=get.heat.mat(result, test.method = "fisher")
