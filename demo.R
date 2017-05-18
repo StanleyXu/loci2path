@@ -14,6 +14,10 @@ biocarta
 #query
 result=query.egset.list(query.gr=query.gr, query.score=NULL, eqtl.set=eqtl.set.list, gene.set=biocarta)
 head(result)
+result.parallel=query.egset.list(query.gr=query.gr, query.score=NULL, eqtl.set=eqtl.set.list, gene.set=biocarta,
+                                 parallel = T)
+head(result.parallel)
+
 
 #query tissue specificity
 gr.tissue=query.tissue(query.gr, eqtl.set.list=eqtl.set.list)

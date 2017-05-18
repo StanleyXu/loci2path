@@ -5,11 +5,12 @@
 #' @param query.score optional, set to NULL if the regions are not ordered.
 #' @param eqtl.set an eqtlSet object; the eQTL set to be queried against
 #' @param gene.set an object of geneSet class; the gene set to be tested
+#' @param parallel bool; whether to enable parallel computing;  default is F
 #' @param verbose bool; whether to show eqtlSet/geneSet summary information; default is F
 #' @export
 #' @examples
 #' #to be added
-query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
+query.egset=function(query.gr, query.score, eqtl.set, gene.set, parallel=F, verbose=F){
   ## check gene id compatibility
   comp=check.geneid(eqtl.set, gene.set)
   if(comp[3]==0){
@@ -35,9 +36,14 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   #init
   res=NULL
   ## query one.set, loop across all sets
-  res.list=lapply(gene.set@gene.set, FUN=function(x){
-    query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t, gene.all, gene.q)}
-  )
+  if(parallel==T){
+    res.list=bplapply(gene.set@gene.set, FUN=function(x){
+      query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t, gene.all, gene.q)})
+  }else{
+    res.list=lapply(gene.set@gene.set, FUN=function(x){
+      query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t, gene.all, gene.q)})    
+  }
+
   ## remove NA
   res.list=res.list[-which(is.na(res.list))]
   if(length(res.list)>0){

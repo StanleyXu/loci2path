@@ -9,10 +9,11 @@
 #' @param query.score optional, set to NULL if the regions are not ordered.
 #' @param eqtl.set.list a list of eqtlSet; each member should be an eqtlSet object
 #' @param gene.set an object of geneSet class; the gene set to be tested
+#' @param parallel bool; whether to enable parallel computing;  default is F
 #' @export
 #' @examples
 #' #to be added
-query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set){
+query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set, parallel=F){
   ts=names(eqtl.set.list)
   tl=length(ts)
   cat(paste0("Start query: ", tl, " eqtl Sets...\n"))
