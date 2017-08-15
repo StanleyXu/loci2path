@@ -1,4 +1,4 @@
-Package: egquery
+Package: loci2path
 Type: Package
 Title: eQTL geneset enrichment query for genomic regions
 Version: 0.1.0
