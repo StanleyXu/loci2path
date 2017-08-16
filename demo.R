@@ -1,7 +1,7 @@
 
 library(devtools)
-install_github("StanleyXu/egquery")
-library(egquery)
+install_github("StanleyXu/loci2path")
+library(loci2path)
 
 
 #show query region

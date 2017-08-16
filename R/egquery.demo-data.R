@@ -11,12 +11,12 @@
 #'
 #' @docType data
 #'
-#' @usage data(egquery.demo)
+#' @usage data(loci2path.demo)
 #'
 #' @keywords datasets
 #'
 #' @examples
-#' data(egquery.demo)
+#' data(loci2path.demo)
 #' @export
 "eqtl.set.list"
 
@@ -34,12 +34,12 @@
 #'
 #' @docType data
 #'
-#' @usage data(egquery.demo)
+#' @usage data(loci2path.demo)
 #'
 #' @keywords datasets
 #'
 #' @examples
-#' data(egquery.demo)
+#' data(loci2path.demo)
 #' @export
 "biocarta"
 
@@ -55,11 +55,11 @@
 #'
 #' @docType data
 #'
-#' @usage data(egquery.demo)
+#' @usage data(loci2path.demo)
 #'
 #' @keywords datasets
 #'
 #' @examples
-#' data(egquery.demo)
+#' data(loci2path.demo)
 #' @export
 "query.gr"
