@@ -10,8 +10,8 @@
 #' @examples
 #' result=query.egset.list(query.gr=query.gr, query.score=NULL,
 #'   eqtl.set=eqtl.set.list, gene.set=biocarta)
-#' plot.pval.distribution(result, test.method="fisher")
-plot.pval.distribution=function(res, test.method=c("glm","fisher","hypergeom")){
+#' draw.pval.distribution(result, test.method="fisher")
+draw.pval.distribution=function(res, test.method=c("glm","fisher","hypergeom")){
   # if(nrow(res)>1000){
   #   res=subset(res, genes_pthw>min.ptw.gene)
   # }

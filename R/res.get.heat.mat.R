@@ -8,8 +8,8 @@
 #' @keywords result
 #' @export
 #' @examples
-#' get.heat.mat(res, test.method="fisher")
-get.heat.mat=function(res, test.method=c("glm","fisher","hypergeom"), filter.quantile=0.5, min.ptw.gene=30){
+#' res.get.heat.mat(res, test.method="fisher")
+res.get.heat.mat=function(res, test.method=c("glm","fisher","hypergeom"), filter.quantile=0.5, min.ptw.gene=30){
   # if(nrow(res)>1000){
   #   res=subset(res, genes_pthw>min.ptw.gene)
   # }

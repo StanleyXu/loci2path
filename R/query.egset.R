@@ -5,12 +5,11 @@
 #' @param query.score optional, set to NULL if the regions are not ordered.
 #' @param eqtl.set an eqtlSet object; the eQTL set to be queried against
 #' @param gene.set an object of geneSet class; the gene set to be tested
-#' @param parallel bool; whether to enable parallel computing;  default is F
 #' @param verbose bool; whether to show eqtlSet/geneSet summary information; default is F
 #' @export
 #' @examples
 #' #to be added
-query.egset2=function(query.gr, query.score, eqtl.set, gene.set, parallel=F, verbose=F){
+query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   ## check gene id compatibility
   comp=check.geneid(eqtl.set, gene.set)
   if(comp[3]==0){
@@ -24,62 +23,89 @@ query.egset2=function(query.gr, query.score, eqtl.set, gene.set, parallel=F, ver
     cat("--gene Set:\n")
     print(gene.set)
   }
+  
+  
   ## get total snp number
   snp.gr=eqtl.set@snp.gr
-  n.snp.t=length(snp.gr)
+  snp.all=length(snp.gr)
   ## get total gene number
   gene.all=gene.set@total.number.gene
   ## overlapping between query regions and all snps
-  over.all=findOverlaps(query.gr, snp.gr)
-  q.all=length(unique(as.data.frame(over.all)$subjectHits))
-  gene.q=length(unique(eqtl.set@gene[as.data.frame(over.all)$subjectHits]))
-  #init
-  res=NULL
-  ## query one.set, loop across all sets
-  if(parallel==T){
-    res.list=bplapply(gene.set@gene.set, FUN=function(x){
-      query.one.set(query.gr, query.score, eqtl.set, x, q.all, n.snp.t, gene.all, gene.q)})
-  }else{
-    res.list=lapply(gene.set@gene.set, FUN=function(x){
-      query.one.set2(query.gr, query.score, eqtl.set, x, q.all, n.snp.t, gene.all, gene.q)})    
+  over.all=as.data.frame(findOverlaps(query.gr, snp.gr))
+  snp.q=length(unique(over.all$subjectHits))
+  ## output overlapping gene list (new version)
+  out.gene.list=unique(eqtl.set@gene[over.all$subjectHits])
+  gene.q=length(out.gene.list)
+  
+  gs=gene.set@gene.set
+  gene.j=sapply(gs, length)
+  #match hit genes with geneset
+  ## find unique gene ids
+  gg=unique(eqtl.set@gene[over.all$subjectHits])
+  over.j.gene=matrix(F, nrow=length(gg), ncol=length(gs))
+  for(i in 1:ncol(over.j.gene)){
+    over.j.gene[,i]=is.element(gg, gs[[i]])
   }
-
+  ix=match(eqtl.set@gene[over.all$subjectHits], gg)
+  over.j.snp=over.j.gene[ix,]
+  ## calculate snp.j: # eQTL snps associated with each pathway, match eqtl-gene-pathway,
+  gg=unique(eqtl.set@gene)  #find unique gene ids
+  snp.j=matrix(F, nrow=length(gg), ncol=length(gs))
+  for(i in 1:ncol(snp.j)){
+    snp.j[,i]=is.element(gg, gs[[i]])
+  }
+  ix=match(eqtl.set@gene, gg)
+  tt=data.table(snp.j)
+  tt=tt[ix,]
+  snp.j=tt[,sapply(.SD, sum)]
+  ## summary snp/gene hit
+  snp.qj=colSums(over.j.snp)
+  gene.qj=colSums(over.j.gene)
+  ## get p-val
+  pval.fisher.gene=phyper(gene.qj-1, gene.j, gene.all-gene.j, gene.q, lower.tail = F)
+  pval.fisher.snp=phyper(snp.qj-1, snp.j, snp.all-snp.j, snp.q, lower.tail = F)
+  ## select
+  #gene hit
+  gene.hit=paste(gene.jq.id, collapse = ";")
+  tt=apply(over.j.gene, 2, FUN=function(x) out.gene.list[x])
+  gene.hit=sapply(tt, FUN=function(x) paste(x, collapse=";"))
+  ##output
+  res=data.frame(
+    names(gs),
+    snp.j, # num of SNPs associated with gene
+    snp.all, # num of all GWAS snps in the tissue
+    snp.q, # num of eQTL overlapping with query region
+    snp.qj, #num of eQTL associated with pathway j, and overlapping with query region
+    snp.log.ratio=log((snp.qj/snp.q)/(snp.j/snp.all)),
+    pval.lr=NA,
+    pval.fisher.snp,
+    gene.j, # num of gene in current geneset
+    gene.q, # number of genes associated with SNPs overlapped by query region
+    gene.qj, # number of genes hit
+    gene.hit, # display hit gene ids
+    gene.log.ratio=log((gene.qj/gene.q)/(gene.j/gene.all)), # log ratio based on gene numbers
+    pval.fisher.gene,
+    
+    stringsAsFactors = F
+  )
+  colnames(res)=c(
+    "name_pthw",
+    "eQTL_pthw",
+    "eQTL_total_tissue",
+    "eQTL_query",
+    "eQTL_pthw_query",
+    "log_ratio",
+    "pval_lr",
+    "pval_fisher",
+    "num_gene_set", #gene.j,  num of gene in current geneset
+    "num_gene_query", # gene.q, # number of genes associated with SNPs overlapped by query region
+    "num_gene_hit", #gene.jq, # number of genes hit
+    "gene_hit", #gene.hit, # display hit gene ids
+    "log_ratio_gene", #log.ratio.gene, # log ratio based on gene numbers
+    "pval_fisher_gene" #pval.fisher.gene
+  )
   ## remove NA
-  res.list=res.list[-which(is.na(res.list))]
-  if(length(res.list)>0){
-    tt=NULL
-    for(i in 1:length(res.list)){
-      tt=rbind(tt, res.list[[i]])
-    }
-    ## organize result
-    res=data.frame(names(res.list), tt, stringsAsFactors = F)
-    
-    pval.fisher=phyper(res$q.j-1, res$j.all, n.snp.t-res$j.all, res$q.all, lower.tail=F)
-    log.ratio=log((res$q.j/res$q.all)/(res$j.all/n.snp.t))
-    pval.fisher.gene=phyper(res$gene.jq-1, res$gene.j, gene.all-res$gene.j, res$gene.q, lower.tail = F)
-    log.ratio.gene=log((res$gene.jq/res$gene.q)/(res$gene.j/gene.all))
-    
-    res=cbind(res[,1:5], log.ratio, res[,6],pval.fisher, res[,7:10], log.ratio.gene, pval.fisher.gene)
-    colnames(res)=c(
-      "name_pthw",
-      #"genes_pthw", #removed; duplicate with num_gene_set
-      "eQTL_pthw",
-      "eQTL_total_tissue",
-      "eQTL_query",
-      "eQTL_pthw_query",
-      "log_ratio",
-      "pval_lr",
-      "pval_fisher",
-      #"pval_hypergeom", #removed; redundant
-      "num_gene_set", #gene.j,  num of gene in current geneset
-      "num_gene_query", # gene.q, # number of genes associated with SNPs overlapped by query region
-      "num_gene_hit", #gene.jq, # number of genes hit
-      "gene_hit", #gene.hit, # display hit gene ids
-      "log_ratio_gene", #log.ratio.gene, # log ratio based on gene numbers
-      "pval_fisher_gene" #pval.fisher.gene
-      #"pval_hypergeom_gene" #pval.hypergeom.gene #removed
-    )
-  }
-
+  res=subset(res, num_gene_hit>0)
+  
   res
 }

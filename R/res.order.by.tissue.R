@@ -6,7 +6,7 @@
 #' @export
 #' @examples
 #' #to be added
-order.by.tissue=function(result, tissue.list){
+res.order.by.tissue=function(result, tissue.list){
   res=NULL
   for(i in 1:length(tissue.list)){
     res=rbind(res, result[which(result$tissue==tissue.list[i]),])

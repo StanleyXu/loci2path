@@ -6,6 +6,7 @@
 #'       Only multiple eQTL set derived from different cells/tissues will show cell/tissue specificity
 #' @param query.gr a GenomicRange object, representing query regions
 #' @param eqtl.set.list a list of eqtlSet; each member should be an eqtlSet object
+#' @param N the total number of non-N nucleotides in the genome; default N=2897310462 is for hg19
 #' @export
 #' @examples
 #' #to be added

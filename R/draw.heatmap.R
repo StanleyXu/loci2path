@@ -9,8 +9,8 @@
 #' result=query.egset.list(query.gr=query.gr, query.score=NULL,
 #'   eqtl.set=eqtl.set.list, gene.set=biocarta)
 #' mat=get.heat.mat(result, test.method = "fisher")
-#' plot.heatmap(mat, main="enrichment between tissue/pathway")
-plot.heatmap=function(mat, main="", silent=T){
+#' draw.heatmap(mat, main="enrichment between tissue/pathway")
+draw.heatmap=function(mat, main="", silent=T){
   mat=-log(mat)
   mc=max(mat[-which(is.infinite(mat))]) + 100
   mat[which(is.infinite(mat))]=mc

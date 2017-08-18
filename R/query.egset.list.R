@@ -13,26 +13,32 @@
 #' @export
 #' @examples
 #' #to be added
-query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set, parallel=F){
+query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set, parallel=F, verbose=F){
   ts=names(eqtl.set.list)
   tl=length(ts)
   cat(paste0("Start query: ", tl, " eqtl Sets...\n"))
-  res=NULL
-  for(i in 1:tl){
-    cat(paste0(i, " of ", tl, ": ",ts[i], "...\n"))
-    one.t=query.egset(query.gr=query.gr, query.score=query.score,
-                      eqtl.set=eqtl.set.list[[i]], gene.set=gene.set,
-                      parallel=parallel)
-    if(length(one.t)>0){
-      res=rbind(res,data.frame(tissue=ts[i], one.t))
+  
+  if(parallel){
+    cat("Run in parallel mode...\n")
+    res.list=lapply(eqtl.set.list, FUN=function(x) query.egset(query.gr, query.score, x, gene.set, verbose))
+    res=do.call(rbind, res.list)
+  }else{
+    res=NULL
+    for(i in 1:tl){
+      cat(paste0(i, " of ", tl, ": ",ts[i], "...\n"))
+      one.t=query.egset(query.gr=query.gr, query.score=query.score,
+                        eqtl.set=eqtl.set.list[[i]], gene.set=gene.set)
+      if(length(one.t)>0){
+        res=rbind(res,data.frame(tissue=ts[i], one.t))
+      }
     }
-
   }
+
   #stop if nothing hit
   if(is.null(res)){
-    message("There's no enrichment detected")
-    return(res)
+    stop("There's no enrichment detected")
   }
+  
   #reorder res
   if(sum(is.na(res$pval_lr))==0){## sort by lr p-value
     res=res[order(res$pval_lr),]

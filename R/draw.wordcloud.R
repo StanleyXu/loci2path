@@ -1,6 +1,6 @@
-#' Plot word cloud to file
+#' Draw word cloud to file
 #'
-#' This function plot the enrichment heatmap to a specific file using pheatmap package.
+#' This function draw the enrichment heatmap to a specific file using pheatmap package.
 #' @param result query result from function \code{query.egset.list()}
 #' @param min.freq.tissue minimum frequency of tissue/cell to be plotted in the word cloud
 #' @param min.freq.gset minimum frequency of geneset to be plotted in the word cloud
@@ -11,7 +11,7 @@
 #'   eqtl.set=eqtl.set.list, gene.set=biocarta)
 #' mat=get.heat.mat(result, test.method = "fisher")
 #' plot.wordcloud(mat, min.freq.tissue=5, min.freq.gset=5, max.words=50)
-plot.wordcloud=function(mat, min.freq.tissue=5, min.freq.gset=5, max.words=50){
+draw.wordcloud=function(mat, min.freq.tissue=5, min.freq.gset=5, max.words=50){
   pthw=sort(table(as.character(result$name_pthw)), decreasing = T)
   tissue=sort(table(as.character(result$tissue)), decreasing = T)
   par(mfrow=c(1,2))
