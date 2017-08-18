@@ -28,7 +28,7 @@ query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set, parall
       cat(paste0(i, " of ", tl, ": ",ts[i], "...\n"))
       one.t=query.egset(query.gr=query.gr, query.score=query.score,
                         eqtl.set=eqtl.set.list[[i]], gene.set=gene.set)
-      if(length(one.t)>0){
+      if(nrow(one.t)>0){
         res=rbind(res,data.frame(tissue=ts[i], one.t))
       }
     }

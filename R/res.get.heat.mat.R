@@ -2,14 +2,14 @@
 #'
 #' This function extracts the enrichment matrix from eQTL list query result. The rows of the matrixs are pathways; and the columns of the matrixs are tissues/cell lines of the eQTL sets. P-Values from enrichment tests are summarized in this matrix
 #' @param res query result from function query.egset.list()
-#' @param test.method Choose which enrichment test should be used to retrive p-values from. Options include:"glm"(logistic regression),"fisher"(fisher exact test) and "hypergeom"(hypergeometric test)
+#' @param test.method Choose which enrichment test should be used to retrive p-values from. Options include:"glm"(logistic regression),"fisher"(fisher exact test) 
 #' @param filter.quantile Filter option; choose the max quantile of all p-values being kept in the matrix; default is 0.5, which means p-values larger than median p-values are discarded
 #' @param min.ptw.gene Filter option; minimum number of genes in a pathway; default is 30 (pathway with <30 genes are not included in the matrix)
 #' @keywords result
 #' @export
 #' @examples
 #' res.get.heat.mat(res, test.method="fisher")
-res.get.heat.mat=function(res, test.method=c("glm","fisher","hypergeom"), filter.quantile=0.5, min.ptw.gene=30){
+res.get.heat.mat=function(res, test.method=c("glm","fisher"), filter.quantile=0.5, min.ptw.gene=30){
   # if(nrow(res)>1000){
   #   res=subset(res, genes_pthw>min.ptw.gene)
   # }
@@ -18,8 +18,6 @@ res.get.heat.mat=function(res, test.method=c("glm","fisher","hypergeom"), filter
     pval=res$pval_lr
   }else if(test.method=="fisher"){
     pval=res$pval_fisher
-  }else{
-    pval=res$pval_hypergeom
   }
   tissue=res$tissue
   gene=res$name_pthw

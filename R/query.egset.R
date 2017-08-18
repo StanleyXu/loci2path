@@ -38,11 +38,12 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   gene.q=length(out.gene.list)
   
   gs=gene.set@gene.set
+  lgs=length(gs)
   gene.j=sapply(gs, length)
   #match hit genes with geneset
   ## find unique gene ids
   gg=unique(eqtl.set@gene[over.all$subjectHits])
-  over.j.gene=matrix(F, nrow=length(gg), ncol=length(gs))
+  over.j.gene=matrix(F, nrow=length(gg), ncol=lgs)
   for(i in 1:ncol(over.j.gene)){
     over.j.gene[,i]=is.element(gg, gs[[i]])
   }
@@ -64,25 +65,28 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   ## get p-val
   pval.fisher.gene=phyper(gene.qj-1, gene.j, gene.all-gene.j, gene.q, lower.tail = F)
   pval.fisher.snp=phyper(snp.qj-1, snp.j, snp.all-snp.j, snp.q, lower.tail = F)
-  ## select
+  ## add log ratio
+  snp.log.ratio=log((snp.qj/snp.q)/(snp.j/snp.all))
+  gene.log.ratio=log((gene.qj/gene.q)/(gene.j/gene.all))
   #gene hit
-  tt=apply(over.j.gene, 2, FUN=function(x) out.gene.list[x])
+  #tt=apply(over.j.gene, 2, FUN=function(x) out.gene.list[x])
+  tt=apply(over.j.gene, 2, FUN=function(x) if(length(out.gene.list[x])){out.gene.list[x]}else{NA})
   gene.hit=sapply(tt, FUN=function(x) paste(x, collapse=";"))
   ##output
   res=data.frame(
     names(gs),
     snp.j, # num of SNPs associated with gene
-    snp.all, # num of all GWAS snps in the tissue
-    snp.q, # num of eQTL overlapping with query region
+    rep(snp.all, lgs), # num of all GWAS snps in the tissue
+    rep(snp.q, lgs), # num of eQTL overlapping with query region
     snp.qj, #num of eQTL associated with pathway j, and overlapping with query region
-    snp.log.ratio=log((snp.qj/snp.q)/(snp.j/snp.all)),
+    snp.log.ratio,
     pval.lr=NA,
     pval.fisher.snp,
     gene.j, # num of gene in current geneset
-    gene.q, # number of genes associated with SNPs overlapped by query region
+    rep(gene.q, lgs), # number of genes associated with SNPs overlapped by query region
     gene.qj, # number of genes hit
     gene.hit, # display hit gene ids
-    gene.log.ratio=log((gene.qj/gene.q)/(gene.j/gene.all)), # log ratio based on gene numbers
+    gene.log.ratio, # log ratio based on gene numbers
     pval.fisher.gene,
     
     stringsAsFactors = F

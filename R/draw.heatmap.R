@@ -12,19 +12,17 @@
 #' draw.heatmap(mat, main="enrichment between tissue/pathway")
 draw.heatmap=function(mat, main="", silent=T){
   mat=-log(mat)
-  mc=max(mat[-which(is.infinite(mat))]) + 100
-  mat[which(is.infinite(mat))]=mc
+  if(sum(is.infinite(mat))>0){#when pval=0
+    mc=max(mat[-which(is.infinite(mat))]) + 100
+    mat[which(is.infinite(mat))]=mc
+  }
   breaks=unique(quantile(mat,1:100/100))
   color = colorRampPalette(rev(brewer.pal(n=7, name ="RdYlBu")))(length(breaks)-1)
-  #plot.height= floor((nrow(mat)+100)/20)
-  #png(file, height=plot.height, width=6, res=200, unit="in")
-  #par(mar=c(4,4,4,4))
   pheatmap(mat,
               show_rownames=T, treeheight_row=0, treeheight_col=0,  cluster_rows=F, cluster_cols=F,
-              cellwidth = 10, cellheight = 4, fontsize_row = 4, fontsize_col=6,
+              #cellwidth = 10, cellheight = 4, fontsize_row = 4, fontsize_col=6,
               breaks=breaks,color=color,
               legend=F,
               main=main
  )
-  #grid.text("ylabel example", x=0.5, rot=90, gp=gpar(fontsize=10))
 }
