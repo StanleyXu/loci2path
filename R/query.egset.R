@@ -66,7 +66,6 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   pval.fisher.snp=phyper(snp.qj-1, snp.j, snp.all-snp.j, snp.q, lower.tail = F)
   ## select
   #gene hit
-  gene.hit=paste(gene.jq.id, collapse = ";")
   tt=apply(over.j.gene, 2, FUN=function(x) out.gene.list[x])
   gene.hit=sapply(tt, FUN=function(x) paste(x, collapse=";"))
   ##output

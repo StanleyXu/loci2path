@@ -6,7 +6,7 @@
 \title{eQTL geneset enrichment query demo data}
 \format{An object of class \code{geneSet} of length 1.}
 \usage{
-data(egquery.demo)
+data(loci2path.demo)
 }
 \description{
 Demo Data to show how to perform eQTL-geneset enrichment query.
@@ -19,6 +19,6 @@ Demo Data to show how to perform eQTL-geneset enrichment query.
 \code{query.gr} A Genomic Region object; Query regions are from immunoBase, crohn's disease.
 }
 \examples{
-data(egquery.demo)
+data(loci2path.demo)
 }
 \keyword{datasets}

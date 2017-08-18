@@ -10,6 +10,8 @@ query.tissue(query.gr, eqtl.set.list, N = 2897310462)
 \item{query.gr}{a GenomicRange object, representing query regions}
 
 \item{eqtl.set.list}{a list of eqtlSet; each member should be an eqtlSet object}
+
+\item{N}{the total number of non-N nucleotides in the genome; default N=2897310462 is for hg19}
 }
 \description{
 This function explore the tissue specificity for query regions. The user need to specify

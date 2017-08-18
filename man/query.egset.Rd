@@ -4,8 +4,7 @@
 \alias{query.egset}
 \title{Query enrichment in geneset through one eQTL set.}
 \usage{
-query.egset(query.gr, query.score, eqtl.set, gene.set, parallel = F,
-  verbose = F)
+query.egset(query.gr, query.score, eqtl.set, gene.set, verbose = F)
 }
 \arguments{
 \item{query.gr}{a GenomicRange object, representing query regions}
@@ -15,8 +14,6 @@ query.egset(query.gr, query.score, eqtl.set, gene.set, parallel = F,
 \item{eqtl.set}{an eqtlSet object; the eQTL set to be queried against}
 
 \item{gene.set}{an object of geneSet class; the gene set to be tested}
-
-\item{parallel}{bool; whether to enable parallel computing;  default is F}
 
 \item{verbose}{bool; whether to show eqtlSet/geneSet summary information; default is F}
 }
