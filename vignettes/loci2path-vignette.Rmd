@@ -9,11 +9,14 @@ abstract: >
   Annotating a given genomic locus or a set of genomic loci is an important yet challenging task. This is especially true for the non-coding part of the genome which is enormous yet poorly understood. Since gene set enrichment analyses have demonstrated to be effective approach to annotate a set of genes, this idea can be extended to explore the enrichment of functional elements or features in a set of genomic intervals to reveal potential functional connections. In this study, we describe a novel computational strategy that takes advantage of the newly emerged, genome-wide and tissue-specific expression quantitative trait loci (eQTL) information to help annotate a set of genomic intervals in terms of transcription regulation. By checking the presence or absence of millions of eQTLs in the set of genomic intervals of interest, loci2path build a bridge connecting genomic intervals to biological pathway or pre-defined biological-meaningful gene sets. Our method enjoys two key advantages over existing methods: first, we no longer rely on proximity to link a locus to a gene which has shown to be unreliable; second, eQTL allows us to provide the regulatory annotation under the context of specific tissue types which is important.
 
 output: 
-  BiocStyle::html_document
+  BiocStyle::pdf_document
+  
 vignette: >
   %\VignetteIndexEntry{loci2path}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}  
+
+bibliography: loci2path-vignette.bib
 ---
 
 
@@ -104,7 +107,7 @@ head(biocarta.link)
 head(set.geneid)
 ```
 
-In order to build gene set, we also need to know the total number of genes in order to perform enrichment test. In this study, the total number of gene in MSigDB pathway collection is 31,847 (ref) 
+In order to build gene set, we also need to know the total number of genes in order to perform enrichment test. In this study, the total number of gene in MSigDB pathway collection is 31,847[@Liberzon2015]
 ```{r}
 #build geneSet
 biocarta=geneSet(
@@ -177,4 +180,6 @@ description=get.geneset.description(biocarta, geneset.ids=result$name_pthw)
 head(description)
 ```
 
+
+# References
 
