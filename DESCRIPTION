@@ -1,14 +1,16 @@
 Package: loci2path
 Type: Package
-Title: eQTL geneset enrichment query for genomic regions
+Title: Loci2path: regulatory annotation of genomic intervals based on tissue-specific expression QTLs
 Version: 0.1.0
 Author: Tianlei Xu
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Maintainer: Tianlei Xu <tianlei.xu@emory.edu>
+Description: loci2path performs statistics-rigorous enrichment analysis of eQTLs in genomic regions of interest. 
+    Using eQTL collections provided by the Genotype-Tissue Expression (GTEx) project and pathway collections from MSigDB. 
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
 Depends:  R (>= 2.10), GenomicRanges
 Imports: gam, pheatmap, wordcloud, RColorBrewer, BiocParallel, data.table
+Suggests: BiocStyle, knitr, rmarkdown
+VignetteBuilder: knitr
 RoxygenNote: 6.0.1.9000
