@@ -17,7 +17,7 @@ res.get.heat.mat=function(res, test.method=c("glm","fisher"), filter.quantile=0.
   if(test.method=="glm"){
     pval=res$pval_lr
   }else if(test.method=="fisher"){
-    pval=res$pval_fisher
+    pval=res$pval_fisher_gene
   }
   tissue=res$tissue
   gene=res$name_pthw
