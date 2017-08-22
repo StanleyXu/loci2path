@@ -14,3 +14,4 @@ Imports: gam, pheatmap, wordcloud, RColorBrewer, data.table
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1.9000
+biocViews:
