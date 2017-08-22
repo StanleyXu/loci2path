@@ -62,41 +62,95 @@ biocarta=geneSet(
   total.number.gene=31847)
 biocarta
 
-## ----echo = FALSE--------------------------------------------------------
+## ------------------------------------------------------------------------
+#query from one eQTL set.
+res.one=query.egset(
+  query.gr=query.gr,
+  query.score=NULL,
+  eqtl.set=skin.eset, 
+  gene.set=biocarta)
 
-#show query region
-query.gr
-#show eqtl set
-eqtl.set.list
-#show gene set(biocarta)
-biocarta
+#enrichment result table
+res.one$result.table
 
-#query
-result=query.egset.list(query.gr=query.gr, query.score=NULL, eqtl.set.list=eqtl.set.list, gene.set=biocarta)
-head(result)
-result.parallel=query.egset.list(query.gr=query.gr, query.score=NULL, eqtl.set=eqtl.set.list, gene.set=biocarta,
-                                 parallel = T)
-head(result.parallel)
+#all the genes associated with eQTLs covered by the query region
+res.one$cover.gene
 
+## ------------------------------------------------------------------------
+#query from one eQTL set.
+res.esetlist=query.egset.list(
+  query.gr=query.gr, 
+  query.score=NULL, 
+  eqtl.set.list=eset.list, 
+  gene.set=biocarta)  
 
+#enrichment result table, tissue column added
+res.esetlist$result.table
+
+#all the genes associated with eQTLs covered by the query region; 
+#names of the list are tissue names from eqtl set list
+res.esetlist$cover.gene
+
+## ------------------------------------------------------------------------
+#query from one eQTL set.
+res.paral=query.egset.list(
+  query.gr=query.gr, 
+  query.score=NULL, 
+  eqtl.set.list=eset.list, 
+  gene.set=biocarta, 
+  parallel=T)  
+#should return the same result as res.esetlist
+
+## ------------------------------------------------------------------------
+result=res.esetlist$result.table
+
+## ------------------------------------------------------------------------
+#all the genes associated with eQTLs covered by the query region
+res.one$cover.gene
+
+#all the genes associated with eQTLs covered by the query region; 
+#names of the list are tissue names from eqtl set list
+res.esetlist$cover.gene
+
+## ------------------------------------------------------------------------
+tissue.degree=res.get.tissue.degree(
+  result, 
+  eset.list)
+
+#check gene-tissue mapping for each gene
+head(tissue.degree$gene.tissue.map)
+
+#check degree for each gene
+head(tissue.degree$gene.tissue.degree)
+
+#average tissue degree for the input result table
+tissue.degree$mean.tissue.degree
+
+#add avg. tissue degree to existing result table
+res.tissue=data.frame(res.esetlist$result.table, t.degree=tissue.degree$mean.tissue.degree)
+
+## ------------------------------------------------------------------------
 #query tissue specificity
-gr.tissue=query.tissue(query.gr, eqtl.set.list=eqtl.set.list)
+gr.tissue=query.tissue(query.gr, eqtl.set.list=eset.list)
+gr.tissue
 
-#reorder result by tissue specificity
-result2=res.order.by.tissue(result, tissue.list = rownames(gr.tissue))
-
-#extract tissue/geneset matrix
+## ------------------------------------------------------------------------
+#extract tissue-pathway matrix
 mat=res.get.heat.mat(result, test.method = "fisher")
 
 #plot heatmap
 draw.heatmap(mat)
 
+## ------------------------------------------------------------------------
+
 #plot word cloud
 draw.wordcloud(result)
 
+## ------------------------------------------------------------------------
 #plot p-value distribution of result
 draw.pval.distribution(result, test.method="fisher")
 
+## ------------------------------------------------------------------------
 #obtain geneset description from object
 description=get.geneset.description(biocarta, geneset.ids=result$name_pthw)
 head(description)

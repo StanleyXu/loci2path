@@ -20,17 +20,21 @@ query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set, parall
   
   if(parallel){
     cat("Run in parallel mode...\n")
-    res.list=lapply(eqtl.set.list, FUN=function(x) query.egset(query.gr, query.score, x, gene.set, verbose))
-    res=do.call(rbind, res.list)
+    res.list=bplapply(eqtl.set.list, FUN=function(x) query.egset(query.gr, query.score, x, gene.set, verbose), BPPARAM=MulticoreParam())
+    res=do.call(rbind, sapply(res.list,"[",1))
+    res=cbind(tissue=rep(ts,sapply(res.list, FUN=function(x) nrow(x$result.table))), res)
+    res.gene=sapply(res.list,"[",2)
   }else{
     res=NULL
+    res.gene=list()
     for(i in 1:tl){
       cat(paste0(i, " of ", tl, ": ",ts[i], "...\n"))
       one.t=query.egset(query.gr=query.gr, query.score=query.score,
                         eqtl.set=eqtl.set.list[[i]], gene.set=gene.set)
-      if(nrow(one.t)>0){
-        res=rbind(res,data.frame(tissue=ts[i], one.t))
+      if(nrow(one.t$result.table)>0){
+        res=rbind(res,data.frame(tissue=ts[i], one.t$result.table))
       }
+      res.gene[[ts[i]]]=one.t$cover.gene
     }
   }
 
@@ -48,5 +52,5 @@ query.egset.list=function(query.gr, query.score, eqtl.set.list, gene.set, parall
   rownames(res)=NULL
   cat(paste0("\ndone!\n"))
 
-  res
+  out=list(result.table=res, cover.gene=res.gene)
 }

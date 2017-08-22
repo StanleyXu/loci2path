@@ -110,5 +110,6 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   ## remove NA
   res=subset(res, num_gene_hit>0)
   
-  res
+  out.res=list(result.table=res, cover.gene=out.gene.list)
+  out.res
 }

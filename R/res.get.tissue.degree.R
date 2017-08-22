@@ -29,5 +29,6 @@ res.get.tissue.degree=function(res, eqtl.set.list){
     gl=strsplit(gg[i], split=";")[[1]]
     mean.tissue[i]=mean(gt.length[gl])
   }
-  res=list(gene.tissue.map=gt, gene.tissue.degree=gt.length, mean.tissue.degree)
+  res=list(gene.tissue.map=gt, gene.tissue.degree=gt.length, mean.tissue.degree=mean.tissue)
+  res
 }

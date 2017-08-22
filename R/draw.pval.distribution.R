@@ -11,7 +11,7 @@
 #' result=query.egset.list(query.gr=query.gr, query.score=NULL,
 #'   eqtl.set=eqtl.set.list, gene.set=biocarta)
 #' draw.pval.distribution(result, test.method="fisher")
-draw.pval.distribution=function(res, test.method=c("glm","fisher","hypergeom")){
+draw.pval.distribution=function(res, test.method=c("glm","fisher")){
   # if(nrow(res)>1000){
   #   res=subset(res, genes_pthw>min.ptw.gene)
   # }
@@ -20,8 +20,6 @@ draw.pval.distribution=function(res, test.method=c("glm","fisher","hypergeom")){
     pval=res$pval_lr
   }else if(test.method=="fisher"){
     pval=res$pval_fisher
-  }else if(test.method=="hypergeom"){
-    pval=res$pval_hypergeom
   }else{
     stop("please specify test method")
   }
