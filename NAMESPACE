@@ -1,4 +1,4 @@
 exportPattern("^[[:alpha:]]+")
-import(gam, pheatmap, wordcloud, RColorBrewer, BiocParallel, data.table)
+import(gam, pheatmap, wordcloud, RColorBrewer, BiocParallel, GenomeInfoDb, data.table)
 importFrom("grDevices", "colorRampPalette")
 importFrom("stats", "fisher.test", "phyper", "quantile")
