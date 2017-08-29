@@ -4,7 +4,7 @@
 \alias{draw.pval.distribution}
 \title{Extract tissue/geneset enrichment p-value distribution from query result}
 \usage{
-draw.pval.distribution(res, test.method = c("glm", "fisher", "hypergeom"))
+draw.pval.distribution(res, test.method = c("glm", "fisher"))
 }
 \arguments{
 \item{res}{query result from function query.egset.list()}
@@ -17,7 +17,7 @@ P-values from different tissues/cell types are organized, and QQ-plot is generat
 }
 \examples{
 result=query.egset.list(query.gr=query.gr, query.score=NULL,
-  eqtl.set=eqtl.set.list, gene.set=biocarta)
+  eqtl.set.list=eset.list, gene.set=biocarta)$result.table
 draw.pval.distribution(result, test.method="fisher")
 }
 \keyword{result}

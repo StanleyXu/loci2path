@@ -9,7 +9,7 @@
 #' @param N the total number of non-N nucleotides in the genome; default N=2897310462 is for hg19
 #' @export
 #' @examples
-#' #to be added
+#' gr.tissue=query.tissue(query.gr, eqtl.set.list=eset.list)
 query.tissue=function(query.gr, eqtl.set.list, N=2897310462){
    #N=2897310462 is the non-N length of hg19; consider change the background length if not hg19
   L=sum(width(reduce(query.gr)))

@@ -17,6 +17,8 @@ query.egset.list(query.gr, query.score, eqtl.set.list, gene.set, parallel = F,
 \item{gene.set}{an object of geneSet class; the gene set to be tested}
 
 \item{parallel}{bool; whether to enable parallel computing;  default is F}
+
+\item{verbose}{bool; whether to show more information during query;  default is F}
 }
 \description{
 This is the main function for query. The user need to specify

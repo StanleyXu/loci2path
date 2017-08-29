@@ -21,5 +21,17 @@ query.egset(query.gr, query.score, eqtl.set, gene.set, verbose = F)
 This function perform enrichment test between one eQTL set and a group of gene sets
 }
 \examples{
-#to be added
+#build one eqtlset
+skin.eset=eset.list$Skin
+#query one egset
+res.one=query.egset(
+  query.gr=query.gr,
+  query.score=NULL,
+  eqtl.set=skin.eset, 
+  gene.set=biocarta
+)
+#enrichment result table
+res.one$result.table   
+#all the genes associated with eQTLs covered by the query region
+res.one$cover.gene
 }

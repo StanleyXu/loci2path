@@ -8,8 +8,8 @@
 #' @slot snp.gr GenomicRanges; position of the SNPs
 #' @slot gene character; gene identifier
 #'
-#' @name eqtlSet
-#' @rdname eqtlSet
+#' @name eqtlSet-class
+#' @rdname eqtlSet-class
 #' @exportClass eqtlSet
 
 eqtlSet <- setClass("eqtlSet",
@@ -29,8 +29,8 @@ eqtlSet <- setClass("eqtlSet",
 #'       such as names, URLs, a short description, etc.
 #' @slot gene.set list;  a list of gene sets; each member of the list is a vector
 #'       containing a group of gene identifiers
-#' @name geneSet
-#' @rdname geneSet
+#' @name geneSet-class
+#' @rdname geneSet-class
 #' @exportClass geneSet
 geneSet <- setClass("geneSet",
                     slot=c(

@@ -3,7 +3,7 @@
 #' Demo Data to show how to perform eQTL-geneset enrichment query. 
 #' 
 #' 
-#' \code{eqtl.set.list} A list of eQTLset objects; eQTL data are collected from GTeX.
+#' \code{eset.list} A list of eQTLset objects; eQTL data are collected from GTeX.
 #' 
 #' \code{biocarta} A Geneset object; Geneset are from Broad Institute's MSigDB: curated gene set, category 'cp': BIOCARTA
 #' 
@@ -18,7 +18,7 @@
 #' @examples
 #' data(loci2path.demo)
 #' @export
-"eqtl.set.list"
+"eset.list"
 
 
 #' eQTL geneset enrichment query demo data

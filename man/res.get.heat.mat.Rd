@@ -4,13 +4,13 @@
 \alias{res.get.heat.mat}
 \title{Extract tissue/geneset enrichment matrix from query result}
 \usage{
-res.get.heat.mat(res, test.method = c("glm", "fisher", "hypergeom"),
+res.get.heat.mat(res, test.method = c("glm", "fisher"),
   filter.quantile = 0.5, min.ptw.gene = 30)
 }
 \arguments{
 \item{res}{query result from function query.egset.list()}
 
-\item{test.method}{Choose which enrichment test should be used to retrive p-values from. Options include:"glm"(logistic regression),"fisher"(fisher exact test) and "hypergeom"(hypergeometric test)}
+\item{test.method}{Choose which enrichment test should be used to retrive p-values from. Options include:"glm"(logistic regression),"fisher"(fisher exact test)}
 
 \item{filter.quantile}{Filter option; choose the max quantile of all p-values being kept in the matrix; default is 0.5, which means p-values larger than median p-values are discarded}
 
@@ -20,6 +20,8 @@ res.get.heat.mat(res, test.method = c("glm", "fisher", "hypergeom"),
 This function extracts the enrichment matrix from eQTL list query result. The rows of the matrixs are pathways; and the columns of the matrixs are tissues/cell lines of the eQTL sets. P-Values from enrichment tests are summarized in this matrix
 }
 \examples{
-res.get.heat.mat(res, test.method="fisher")
+result=query.egset.list(query.gr=query.gr, query.score=NULL,
+  eqtl.set.list=eset.list, gene.set=biocarta)$result.table
+mat=res.get.heat.mat(result, test.method = "fisher")
 }
 \keyword{result}

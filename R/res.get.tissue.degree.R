@@ -1,14 +1,16 @@
-#' Extract tissue/geneset enrichment matrix from query result
+#' Extract tissue degree from query result
 #'
-#' This function extracts the enrichment matrix from eQTL list query result. The rows of the matrixs are pathways; and the columns of the matrixs are tissues/cell lines of the eQTL sets. P-Values from enrichment tests are summarized in this matrix
+#' This function extracts the tissue degree from eQTL list query result for each pathway. 
+#' 
 #' @param res query result from function query.egset.list()
 #' @param eqtl.set.list a list of eqtlSet; each member should be an eqtlSet object
+#' @return a list; {gene.tissue.map} shows
 #' @keywords result
 #' @export
 #' @examples
 #' result=query.egset.list(query.gr=query.gr, query.score=NULL,
-#'   eqtl.set.list=eqtl.set.list, gene.set=biocarta)
-#' tissue.dgree=res.get.tissue.degree(result, eqtl.set.list)
+#'   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
+#' tissue.degree=res.get.tissue.degree(result, eset.list)
 #' head(tissue.degree$gene.tissue.map)
 #' head(tissue.degree$gene.tissue.degree)
 #' head(tissue.degree$mean.tissue.digree)

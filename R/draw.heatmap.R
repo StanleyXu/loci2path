@@ -7,10 +7,10 @@
 #' @export
 #' @examples
 #' result=query.egset.list(query.gr=query.gr, query.score=NULL,
-#'   eqtl.set=eqtl.set.list, gene.set=biocarta)
-#' mat=get.heat.mat(result, test.method = "fisher")
+#'   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
+#' mat=res.get.heat.mat(result, test.method = "fisher")
 #' draw.heatmap(mat, main="enrichment between tissue/pathway")
-draw.heatmap=function(mat, main="", silent=T){
+draw.heatmap=function(mat, main=""){
   mat=-log(mat)
   if(sum(is.infinite(mat))>0){#when pval=0
     mc=max(mat[-which(is.infinite(mat))]) + 100

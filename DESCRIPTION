@@ -10,7 +10,7 @@ License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
 Depends:  R (>= 2.10), GenomicRanges, BiocParallel, GenomeInfoDb
-Imports: gam, pheatmap, wordcloud, RColorBrewer, data.table
+Imports: gam, pheatmap, wordcloud, RColorBrewer, data.table, methods
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1.9000

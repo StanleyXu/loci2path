@@ -8,7 +8,9 @@
 #' @keywords result
 #' @export
 #' @examples
-#' res.get.heat.mat(res, test.method="fisher")
+#' result=query.egset.list(query.gr=query.gr, query.score=NULL,
+#'   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
+#' mat=res.get.heat.mat(result, test.method = "fisher")
 res.get.heat.mat=function(res, test.method=c("glm","fisher"), filter.quantile=0.5, min.ptw.gene=30){
   # if(nrow(res)>1000){
   #   res=subset(res, genes_pthw>min.ptw.gene)

@@ -4,7 +4,7 @@
 \alias{draw.heatmap}
 \title{Generate heatmap of enrichment matrix}
 \usage{
-draw.heatmap(mat, main = "", silent = T)
+draw.heatmap(mat, main = "")
 }
 \arguments{
 \item{mat}{query result matrix from function \code{get.heat.mat()}}
@@ -16,8 +16,8 @@ This function generate the enrichment heatmap using pheatmap package.
 }
 \examples{
 result=query.egset.list(query.gr=query.gr, query.score=NULL,
-  eqtl.set=eqtl.set.list, gene.set=biocarta)
-mat=get.heat.mat(result, test.method = "fisher")
+  eqtl.set.list=eset.list, gene.set=biocarta)$result.table
+mat=res.get.heat.mat(result, test.method = "fisher")
 draw.heatmap(mat, main="enrichment between tissue/pathway")
 }
 \keyword{heatmap}

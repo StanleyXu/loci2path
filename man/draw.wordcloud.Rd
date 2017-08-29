@@ -4,24 +4,26 @@
 \alias{draw.wordcloud}
 \title{Draw word cloud to file}
 \usage{
-draw.wordcloud(mat, min.freq.tissue = 5, min.freq.gset = 5,
+draw.wordcloud(result, min.freq.tissue = 5, min.freq.gset = 5,
   max.words = 50)
 }
 \arguments{
+\item{result}{query result from function \code{query.egset.list()}}
+
 \item{min.freq.tissue}{minimum frequency of tissue/cell to be plotted in the word cloud}
 
 \item{min.freq.gset}{minimum frequency of geneset to be plotted in the word cloud}
 
-\item{result}{query result from function \code{query.egset.list()}}
+\item{max.words}{maximum words to be generated}
 }
 \description{
 This function draw the enrichment heatmap to a specific file using pheatmap package.
 }
 \examples{
 result=query.egset.list(query.gr=query.gr, query.score=NULL,
-  eqtl.set=eqtl.set.list, gene.set=biocarta)
-mat=get.heat.mat(result, test.method = "fisher")
-plot.wordcloud(mat, min.freq.tissue=5, min.freq.gset=5, max.words=50)
+  eqtl.set.list=eset.list, gene.set=biocarta)$result.table
+mat=res.get.heat.mat(result, test.method = "fisher")
+draw.wordcloud(result, min.freq.tissue = 2, min.freq.gset = 1)
 }
 \keyword{cloud}
 \keyword{word}

@@ -1,4 +1,7 @@
 exportPattern("^[[:alpha:]]+")
 import(gam, pheatmap, wordcloud, RColorBrewer, BiocParallel, GenomeInfoDb, data.table)
 importFrom("grDevices", "colorRampPalette")
-importFrom("stats", "fisher.test", "phyper", "quantile")
+importFrom("stats", "fisher.test", "phyper", "quantile", "p.adjust", "pbinom")
+importFrom("graphics", "legend", "par", "plot", "points", "text")
+importFrom("methods", "new")
+importFrom("GenomicRanges", "width", "reduce", "findOverlaps")

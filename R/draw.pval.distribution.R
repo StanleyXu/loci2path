@@ -9,7 +9,7 @@
 #' @export
 #' @examples
 #' result=query.egset.list(query.gr=query.gr, query.score=NULL,
-#'   eqtl.set=eqtl.set.list, gene.set=biocarta)
+#'   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
 #' draw.pval.distribution(result, test.method="fisher")
 draw.pval.distribution=function(res, test.method=c("glm","fisher")){
   # if(nrow(res)>1000){
@@ -19,7 +19,7 @@ draw.pval.distribution=function(res, test.method=c("glm","fisher")){
   if(test.method=="glm"){
     pval=res$pval_lr
   }else if(test.method=="fisher"){
-    pval=res$pval_fisher
+    pval=res$pval_fisher_gene
   }else{
     stop("please specify test method")
   }

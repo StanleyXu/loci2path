@@ -10,6 +10,7 @@
 #' @param eqtl.set.list a list of eqtlSet; each member should be an eqtlSet object
 #' @param gene.set an object of geneSet class; the gene set to be tested
 #' @param parallel bool; whether to enable parallel computing;  default is F
+#' @param verbose bool; whether to show more information during query;  default is F
 #' @export
 #' @examples
 #' #to be added

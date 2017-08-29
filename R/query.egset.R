@@ -8,7 +8,19 @@
 #' @param verbose bool; whether to show eqtlSet/geneSet summary information; default is F
 #' @export
 #' @examples
-#' #to be added
+#' #build one eqtlset
+#' skin.eset=eset.list$Skin
+#' #query one egset
+#' res.one=query.egset(
+#'   query.gr=query.gr,
+#'   query.score=NULL,
+#'   eqtl.set=skin.eset, 
+#'   gene.set=biocarta
+#' )
+#' #enrichment result table
+#' res.one$result.table   
+#' #all the genes associated with eQTLs covered by the query region
+#' res.one$cover.gene
 query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
   ## check gene id compatibility
   comp=check.geneid(eqtl.set, gene.set)
@@ -108,6 +120,7 @@ query.egset=function(query.gr, query.score, eqtl.set, gene.set, verbose=F){
     "pval_fisher_gene" #pval.fisher.gene
   )
   ## remove NA
+  num_gene_hit=NULL #simply to surpress checking note; not used 
   res=subset(res, num_gene_hit>0)
   
   out.res=list(result.table=res, cover.gene=out.gene.list)

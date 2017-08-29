@@ -29,6 +29,7 @@ bibliography: loci2path-vignette.bib
 In the demo data, 47 regions associated with Psoriasis disease were downloaded from **immunoBase.org** and used as demo query regions. 
 
 ```{r query_region}
+require(GenomicRanges)
 bed.file=system.file("extdata", "query/Psoriasis.BED", package = "loci2path")
 query.bed=read.table(bed.file, header=F)
 colnames(query.bed)=c("chr","start","end")
@@ -47,6 +48,7 @@ Below is an example to construct customized eQTL set and eQTL set list using dem
 
 ### construct eQTL set
 ```{r eset}
+library(loci2path)
 brain.file=system.file("extdata", "eqtl/brain.gtex.txt", package = "loci2path")
 tab=read.table(brain.file, stringsAsFactors = F, header = T)
 snp.gr=GRanges(seqnames=Rle(tab$snp.chr), 

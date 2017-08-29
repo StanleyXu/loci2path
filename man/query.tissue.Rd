@@ -20,5 +20,5 @@ This function explore the tissue specificity for query regions. The user need to
       Only multiple eQTL set derived from different cells/tissues will show cell/tissue specificity
 }
 \examples{
-#to be added
+gr.tissue=query.tissue(query.gr, eqtl.set.list=eset.list)
 }
