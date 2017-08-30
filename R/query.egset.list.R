@@ -22,7 +22,7 @@
 #'  covered by the query region(s)
 #' @export
 #' @examples
-#' result = uery.egset.list(query.gr=query.gr, query.score=NULL,
+#' result = query.egset.list(query.gr=query.gr, query.score=NULL,
 #'     eqtl.set.list=eset.list, gene.set=biocarta)
 #' #enrichment result table
 #' result$result.table

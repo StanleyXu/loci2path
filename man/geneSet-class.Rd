@@ -32,7 +32,7 @@ biocarta.set.file = system.file("extdata", "geneSet/biocarta.set.txt",
 set.geneid = read.table(biocarta.set.file, stringsAsFactors = FALSE)
 set.geneid = strsplit(set.geneid[,1], split=",")
 names(set.geneid) = biocarta.link[,1]
-biocarta = g eneSet(
+biocarta = geneSet(
     gene.set = set.geneid,
     description = biocarta.link[,2],
     total.number.gene = 31847)

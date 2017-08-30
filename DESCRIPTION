@@ -1,7 +1,7 @@
 Package: loci2path
 Type: Package
 Title: Loci2path: regulatory annotation of genomic intervals based on tissue-specific expression QTLs
-Version: 0.99.0
+Version: 0.99.1
 Author: Tianlei Xu
 Maintainer: Tianlei Xu <tianlei.xu@emory.edu>
 Description: loci2path performs statistics-rigorous enrichment analysis of eQTLs in genomic regions of interest. 
