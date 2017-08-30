@@ -11,6 +11,10 @@ draw.heatmap(mat, main = "")
 
 \item{main}{title of the heatmap, default is ""}
 }
+\value{
+generate heatmap to graphic device and return result from calling
+ \code{pheatmap()}.
+}
 \description{
 This function generate the enrichment heatmap using pheatmap package.
 }

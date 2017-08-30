@@ -9,9 +9,9 @@ Description: loci2path performs statistics-rigorous enrichment analysis of eQTLs
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
-Depends:  R (>= 2.10), GenomicRanges, BiocParallel, GenomeInfoDb
-Imports: gam, pheatmap, wordcloud, RColorBrewer, data.table, methods
+Depends:  R (>= 3.4), GenomicRanges, BiocParallel, GenomeInfoDb
+Imports: gam, pheatmap, wordcloud, RColorBrewer, data.table, methods, grDevices, stats, graphics
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1.9000
-biocViews: 	FunctionalGenomics, Genetics, GeneSetEnrichment, Software
+biocViews: 	FunctionalGenomics, Genetics, GeneSetEnrichment, Software, GeneExpression, Sequencing, Coverage, BioCarta

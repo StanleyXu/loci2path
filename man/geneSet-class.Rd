@@ -6,7 +6,8 @@
 \alias{geneSet}
 \title{geneSet Class}
 \description{
-geneSet Class contains information for names of gene sets and a list of gene sets
+geneSet Class contains information for names of gene sets and a list of 
+gene sets
 }
 \section{Slots}{
 
@@ -14,10 +15,25 @@ geneSet Class contains information for names of gene sets and a list of gene set
 \item{\code{total.number.gene}}{numeric; the total number of all genes;
 This number is used in enrichment tests}
 
-\item{\code{description}}{vector of character; additional information for gene sets,
-such as names, URLs, a short description, etc.}
+\item{\code{description}}{vector of character; additional information for gene 
+sets, such as names, URLs, a short description, etc.}
 
-\item{\code{gene.set}}{list;  a list of gene sets; each member of the list is a vector
-containing a group of gene identifiers}
+\item{\code{gene.set}}{list;  a list of gene sets; each member of the list is a 
+vector containing a group of gene identifiers}
 }}
 
+\examples{
+biocarta.link.file=system.file("extdata", 
+  "geneSet/biocarta.txt", package = "loci2path")
+biocarta.link=read.delim(biocarta.link.file, header = FALSE, 
+  stringsAsFactors = FALSE)
+biocarta.set.file=system.file("extdata", "geneSet/biocarta.set.txt", 
+  package = "loci2path")
+set.geneid=read.table(biocarta.set.file, stringsAsFactors = FALSE)
+set.geneid=strsplit(set.geneid[,1], split=",")
+names(set.geneid)=biocarta.link[,1]
+biocarta=geneSet(
+  gene.set=set.geneid,
+  description=biocarta.link[,2],
+  total.number.gene=31847)
+}

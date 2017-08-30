@@ -11,9 +11,13 @@ check.geneid(e.set, g.set)
 
 \item{g.set}{an object of geneSet class; the gene set to be tested}
 }
+\value{
+a \code{data.frame} shows the number of genes from 
+  (1) eqtl Set (2) gene Set (3) shared
+}
 \description{
 This function perform enrichment test between one eQTL set and one gene set
 }
 \examples{
-#to be added
+check.geneid(eset.list$Skin, biocarta)
 }

@@ -11,6 +11,10 @@ get.geneset.description(geneset, geneset.ids)
 
 \item{geneset.ids}{Character; the names of the gene sets.}
 }
+\value{
+a vector of gene set description from \code{geneSet} description 
+slot
+}
 \description{
 This function extracts the gene set description from geneSet object.
 }

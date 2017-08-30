@@ -9,11 +9,17 @@ draw.pval.distribution(res, test.method = c("glm", "fisher"))
 \arguments{
 \item{res}{query result from function query.egset.list()}
 
-\item{test.method}{Choose which enrichment test should be used to retrive p-values from. Options include:"glm"(logistic regression),"fisher"(fisher exact test) and "hypergeom"(hypergeometric test)}
+\item{test.method}{Choose which enrichment test should be used to retrive 
+p-values from. Options include:"glm"(logistic regression),"fisher"(fisher
+exact test) and "hypergeom"(hypergeometric test)}
+}
+\value{
+generate pval distribution plot
 }
 \description{
-This function extracts the enrichment p-value distribution from eQTL list query result.
-P-values from different tissues/cell types are organized, and QQ-plot is generated against uniform distribution
+This function extracts the enrichment p-value distribution from eQTL list 
+ query result. P-values from different tissues/cell types are organized, 
+ and QQ-plot is generated against uniform distribution
 }
 \examples{
 result=query.egset.list(query.gr=query.gr, query.score=NULL,

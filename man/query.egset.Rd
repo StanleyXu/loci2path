@@ -4,7 +4,7 @@
 \alias{query.egset}
 \title{Query enrichment in geneset through one eQTL set.}
 \usage{
-query.egset(query.gr, query.score, eqtl.set, gene.set, verbose = F)
+query.egset(query.gr, query.score, eqtl.set, gene.set, verbose = FALSE)
 }
 \arguments{
 \item{query.gr}{a GenomicRange object, representing query regions}
@@ -15,10 +15,18 @@ query.egset(query.gr, query.score, eqtl.set, gene.set, verbose = F)
 
 \item{gene.set}{an object of geneSet class; the gene set to be tested}
 
-\item{verbose}{bool; whether to show eqtlSet/geneSet summary information; default is F}
+\item{verbose}{bool; whether to show eqtlSet/geneSet summary information;
+default is FALSE}
+}
+\value{
+a list; \code{result.table} is the major result table showing 
+enrichment assessment;
+ \code{cover.gene} is the vector showing the genes from the eqtl Sets 
+ covered by the query region(s)
 }
 \description{
-This function perform enrichment test between one eQTL set and a group of gene sets
+This function perform enrichment test between one eQTL set and a group of
+ gene sets
 }
 \examples{
 #build one eqtlset

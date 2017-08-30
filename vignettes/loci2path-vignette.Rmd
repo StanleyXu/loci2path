@@ -1,12 +1,30 @@
 ---
-title: "Loci2path: regulatory annotation of genomic intervals based on tissue-specific expression QTLs"
+title: "Loci2path: regulatory annotation of genomic intervals based on
+  tissue-specific expression QTLs"
 author: 
   - Tianlei Xu
   - Zhaohui Qin
 date: "`r doc_date()`"
 package: "`r pkg_ver('loci2path')`"
 abstract: > 
-  Annotating a given genomic locus or a set of genomic loci is an important yet challenging task. This is especially true for the non-coding part of the genome which is enormous yet poorly understood. Since gene set enrichment analyses have demonstrated to be effective approach to annotate a set of genes, this idea can be extended to explore the enrichment of functional elements or features in a set of genomic intervals to reveal potential functional connections. In this study, we describe a novel computational strategy that takes advantage of the newly emerged, genome-wide and tissue-specific expression quantitative trait loci (eQTL) information to help annotate a set of genomic intervals in terms of transcription regulation. By checking the presence or absence of millions of eQTLs in the set of genomic intervals of interest, loci2path build a bridge connecting genomic intervals to biological pathway or pre-defined biological-meaningful gene sets. Our method enjoys two key advantages over existing methods: first, we no longer rely on proximity to link a locus to a gene which has shown to be unreliable; second, eQTL allows us to provide the regulatory annotation under the context of specific tissue types which is important.
+  Annotating a given genomic locus or a set of genomic loci is an important
+  yet challenging task. This is especially true for the non-coding part of the
+  genome which is enormous yet poorly understood. Since gene set enrichment
+  analyses have demonstrated to be effective approach to annotate a set of
+  genes, this idea can be extended to explore the enrichment of functional
+  elements or features in a set of genomic intervals to reveal potential
+  functional connections. In this study, we describe a novel computational
+  strategy that takes advantage of the newly emerged, genome-wide and
+  tissue-specific expression quantitative trait loci (eQTL) information to
+  help annotate a set of genomic intervals in terms of transcription
+  regulation. By checking the presence or absence of millions of eQTLs in the
+  set of genomic intervals of interest, loci2path build a bridge connecting
+  genomic intervals to biological pathway or pre-defined biological-meaningful
+  gene sets. Our method enjoys two key advantages over existing methods:
+  first, we no longer rely on proximity to link a locus to a gene which has
+  shown to be unreliable; second, eQTL allows us to provide the regulatory
+  annotation under the context of specific tissue types which is important.
+  
 
 output: 
   BiocStyle::pdf_document
@@ -25,32 +43,44 @@ bibliography: loci2path-vignette.bib
 
 ## Query regions
 
-`loci2path` takes query regions in the format of `GenomicRanges`. Only the Genomic Locations (chromosomes, start and end position) will be used. Strand information and other metadata columns are ignored.
-In the demo data, 47 regions associated with Psoriasis disease were downloaded from **immunoBase.org** and used as demo query regions. 
+`loci2path` takes query regions in the format of `GenomicRanges`. Only the
+Genomic Locations (chromosomes, start and end position) will be used. Strand
+information and other metadata columns are ignored.
+In the demo data, 47 regions associated with Psoriasis disease were downloaded
+from **immunoBase.org** and used as demo query regions. 
 
 ```{r query_region}
 require(GenomicRanges)
 bed.file=system.file("extdata", "query/Psoriasis.BED", package = "loci2path")
-query.bed=read.table(bed.file, header=F)
+query.bed=read.table(bed.file, header=FALSE)
 colnames(query.bed)=c("chr","start","end")
 query.gr=makeGRangesFromDataFrame(query.bed)
 ```
 
 ## Prepare eQTL sets.
 
-eQTL sets are entities recording 1-to-1 links between eQTL SNPs and genes. eQTL set entity also contains the following information: tissue name for the eQTL study, IDs and genomic ranges for the eQTL SNPs, IDs for the associated genes.
+eQTL sets are entities recording 1-to-1 links between eQTL SNPs and genes.
+eQTL set entity also contains the following information: tissue name for the
+eQTL study, IDs and genomic ranges for the eQTL SNPs, IDs for the associated
+genes.
 
-eQTL set can be constructed manually by specifying the corresponding information in each slot. 
+eQTL set can be constructed manually by specifying the corresponding
+information in each slot. 
 
-eQTL set list is a list of multiple eQTL sets, usually collected from different tissues.
+eQTL set list is a list of multiple eQTL sets, usually collected from
+different tissues.
 
-Below is an example to construct customized eQTL set and eQTL set list using demo data files. In the demo data folder, three eQTL sets downloaded from GTEx project are included. Due to the large size, each eQTL dataset is down sampled to 3000 records for demostration purpose. 
+Below is an example to construct customized eQTL set and eQTL set list using
+demo data files. In the demo data folder, three eQTL sets downloaded from GTEx
+project are included. Due to the large size, each eQTL dataset is down sampled
+to 3000 records for demostration purpose. 
 
 ### construct eQTL set
 ```{r eset}
 library(loci2path)
-brain.file=system.file("extdata", "eqtl/brain.gtex.txt", package = "loci2path")
-tab=read.table(brain.file, stringsAsFactors = F, header = T)
+brain.file=system.file("extdata", "eqtl/brain.gtex.txt", 
+                       package = "loci2path")
+tab=read.table(brain.file, stringsAsFactors = FALSE, header = TRUE)
 snp.gr=GRanges(seqnames=Rle(tab$snp.chr), 
   ranges=IRanges(start=tab$snp.pos, 
   width=1))
@@ -61,7 +91,7 @@ brain.eset=eqtlSet(tissue="brain",
 brain.eset
 
 skin.file=system.file("extdata", "eqtl/skin.gtex.txt", package = "loci2path")
-tab=read.table(skin.file, stringsAsFactors = F, header = T)
+tab=read.table(skin.file, stringsAsFactors = FALSE, header = TRUE)
 snp.gr=GRanges(seqnames=Rle(tab$snp.chr), 
   ranges=IRanges(start=tab$snp.pos, 
   width=1))
@@ -71,8 +101,9 @@ skin.eset=eqtlSet(tissue="skin",
   gene=as.character(tab$gene.entrez.id))
 skin.eset
 
-blood.file=system.file("extdata", "eqtl/blood.gtex.txt", package = "loci2path")
-tab=read.table(blood.file, stringsAsFactors = F, header = T)
+blood.file=system.file("extdata", "eqtl/blood.gtex.txt", 
+                       package = "loci2path")
+tab=read.table(blood.file, stringsAsFactors = FALSE, header = TRUE)
 snp.gr=GRanges(seqnames=Rle(tab$snp.chr), 
   ranges=IRanges(start=tab$snp.pos, 
   width=1))
@@ -94,14 +125,21 @@ eset.list
 
 ## Prepare gene set collection
 
-A geneset collection contains a list of gene sets, with each gene set is represented as a vector of member genes. A vector of description is also provided as the metadata slot for each gene set. The total number of gene in the geneset collection is also required to perform the enrichment test. In this tutorial the BIOCARTA pathway collection was downloaded from MSigDB. 
+A geneset collection contains a list of gene sets, with each gene set is
+represented as a vector of member genes. A vector of description is also
+provided as the metadata slot for each gene set. The total number of gene in
+the geneset collection is also required to perform the enrichment test. In
+this tutorial the BIOCARTA pathway collection was downloaded from MSigDB. 
 
 ```{r}
-biocarta.link.file=system.file("extdata", "geneSet/biocarta.txt", package = "loci2path")
-biocarta.set.file=system.file("extdata", "geneSet/biocarta.set.txt", package = "loci2path")
+biocarta.link.file=system.file("extdata", "geneSet/biocarta.txt", 
+                               package = "loci2path")
+biocarta.set.file=system.file("extdata", "geneSet/biocarta.set.txt", 
+                              package = "loci2path")
 
-biocarta.link=read.delim(biocarta.link.file, header = F, stringsAsFactors = F)
-set.geneid=read.table(biocarta.set.file, stringsAsFactors = F)
+biocarta.link=read.delim(biocarta.link.file, header = FALSE, 
+                         stringsAsFactors = FALSE)
+set.geneid=read.table(biocarta.set.file, stringsAsFactors = FALSE)
 set.geneid=strsplit(set.geneid[,1], split=",")
 names(set.geneid)=biocarta.link[,1]
 
@@ -109,7 +147,9 @@ head(biocarta.link)
 head(set.geneid)
 ```
 
-In order to build gene set, we also need to know the total number of genes in order to perform enrichment test. In this study, the total number of gene in MSigDB pathway collection is 31,847[@Liberzon2015]
+In order to build gene set, we also need to know the total number of genes in
+order to perform enrichment test. In this study, the total number of gene in
+MSigDB pathway collection is 31,847[@Liberzon2015]
 ```{r}
 #build geneSet
 biocarta=geneSet(
@@ -118,10 +158,6 @@ biocarta=geneSet(
   total.number.gene=31847)
 biocarta
 ```
-
-
-
-
 
 
 # Perform query
@@ -162,12 +198,12 @@ res.esetlist$cover.gene
 ## parallel query from multiple eQTL sets
 ```{r}
 #query from one eQTL set.
-res.paral=query.egset.list(
-  query.gr=query.gr, 
-  query.score=NULL, 
-  eqtl.set.list=eset.list, 
-  gene.set=biocarta, 
-  parallel=T)  
+res.paral = query.egset.list(
+  query.gr = query.gr, 
+  query.score = NULL, 
+  eqtl.set.list = eset.list, 
+  gene.set = biocarta, 
+  parallel = TRUE)  
 #should return the same result as res.esetlist
 ```
 
@@ -211,7 +247,8 @@ head(tissue.degree$gene.tissue.degree)
 tissue.degree$mean.tissue.degree
 
 #add avg. tissue degree to existing result table
-res.tissue=data.frame(res.esetlist$result.table, t.degree=tissue.degree$mean.tissue.degree)
+res.tissue=data.frame(res.esetlist$result.table,
+                      t.degree=tissue.degree$mean.tissue.degree)
 ```
 
 

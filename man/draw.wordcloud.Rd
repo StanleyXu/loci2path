@@ -10,14 +10,20 @@ draw.wordcloud(result, min.freq.tissue = 5, min.freq.gset = 5,
 \arguments{
 \item{result}{query result from function \code{query.egset.list()}}
 
-\item{min.freq.tissue}{minimum frequency of tissue/cell to be plotted in the word cloud}
+\item{min.freq.tissue}{minimum frequency of tissue/cell to be plotted in 
+the word cloud}
 
-\item{min.freq.gset}{minimum frequency of geneset to be plotted in the word cloud}
+\item{min.freq.gset}{minimum frequency of geneset to be plotted in the 
+word cloud}
 
 \item{max.words}{maximum words to be generated}
 }
+\value{
+empty
+}
 \description{
-This function draw the enrichment heatmap to a specific file using pheatmap package.
+This function draw the enrichment heatmap to a specific file using 
+\code{pheatmap} package.
 }
 \examples{
 result=query.egset.list(query.gr=query.gr, query.score=NULL,
