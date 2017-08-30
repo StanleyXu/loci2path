@@ -23,17 +23,17 @@ vector containing a group of gene identifiers}
 }}
 
 \examples{
-biocarta.link.file=system.file("extdata", 
-  "geneSet/biocarta.txt", package = "loci2path")
-biocarta.link=read.delim(biocarta.link.file, header = FALSE, 
-  stringsAsFactors = FALSE)
-biocarta.set.file=system.file("extdata", "geneSet/biocarta.set.txt", 
-  package = "loci2path")
-set.geneid=read.table(biocarta.set.file, stringsAsFactors = FALSE)
-set.geneid=strsplit(set.geneid[,1], split=",")
-names(set.geneid)=biocarta.link[,1]
-biocarta=geneSet(
-  gene.set=set.geneid,
-  description=biocarta.link[,2],
-  total.number.gene=31847)
+biocarta.link.file = system.file("extdata", 
+    "geneSet/biocarta.txt", package = "loci2path")
+biocarta.link = read.delim(biocarta.link.file, header = FALSE, 
+    stringsAsFactors = FALSE)
+biocarta.set.file = system.file("extdata", "geneSet/biocarta.set.txt", 
+    package = "loci2path")
+set.geneid = read.table(biocarta.set.file, stringsAsFactors = FALSE)
+set.geneid = strsplit(set.geneid[,1], split=",")
+names(set.geneid) = biocarta.link[,1]
+biocarta = g eneSet(
+    gene.set = set.geneid,
+    description = biocarta.link[,2],
+    total.number.gene = 31847)
 }

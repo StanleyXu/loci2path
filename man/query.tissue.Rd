@@ -9,22 +9,22 @@ query.tissue(query.gr, eqtl.set.list, N = 2897310462)
 \arguments{
 \item{query.gr}{a GenomicRange object, representing query regions}
 
-\item{eqtl.set.list}{a list of eqtlSet; each member should be an eqtlSet 
+\item{eqtl.set.list}{a list of eqtlSet; each member should be an eqtlSet
 object}
 
-\item{N}{the total number of non-N nucleotides in the genome; 
+\item{N}{the total number of non-N nucleotides in the genome;
 default N=2897310462 is for hg19}
 }
 \value{
-a data.frame showing the tissue enrichment of the query regions 
+a data.frame showing the tissue enrichment of the query regions
 by binomial test.
 }
 \description{
-This function explore the tissue specificity for query regions. The user 
+This function explore the tissue specificity for query regions. The user
 need to specify
 - (1) Query region
 - (2) eQTL set list; this is usually more than one eQTL set.
-      Only multiple eQTL set derived from different cells/tissues will 
+      Only multiple eQTL set derived from different cells/tissues will
       show cell/tissue specificity
 }
 \examples{

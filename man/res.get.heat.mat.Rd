@@ -10,24 +10,24 @@ res.get.heat.mat(res, test.method = c("glm", "fisher"),
 \arguments{
 \item{res}{query result from function query.egset.list()}
 
-\item{test.method}{Choose which enrichment test should be used to retrive 
+\item{test.method}{Choose which enrichment test should be used to retrive
 p-values from. Options include:"glm"(logistic regression),"fisher"
 (fisher exact test)}
 
-\item{filter.quantile}{Filter option; choose the max quantile of all 
-p-values being kept in the matrix; default is 0.5, which means p-values 
+\item{filter.quantile}{Filter option; choose the max quantile of all
+p-values being kept in the matrix; default is 0.5, which means p-values
 larger than median p-values are discarded}
 
-\item{min.ptw.gene}{Filter option; minimum number of genes in a pathway; 
+\item{min.ptw.gene}{Filter option; minimum number of genes in a pathway;
 default is 30 (pathway with <30 genes are not included in the matrix)}
 }
 \value{
 p-value matrix collected from enrichment result table
 }
 \description{
-This function extracts the enrichment matrix from eQTL list query result. 
-The rows of the matrixs are pathways; and the columns of the matrixs are 
-tissues/cell lines of the eQTL sets. P-Values from enrichment tests are 
+This function extracts the enrichment matrix from eQTL list query result.
+The rows of the matrixs are pathways; and the columns of the matrixs are
+tissues/cell lines of the eQTL sets. P-Values from enrichment tests are
 summarized in this matrix
 }
 \examples{

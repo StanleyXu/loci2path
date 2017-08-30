@@ -20,7 +20,7 @@ This function generate the enrichment heatmap using pheatmap package.
 }
 \examples{
 result=query.egset.list(query.gr=query.gr, query.score=NULL,
-  eqtl.set.list=eset.list, gene.set=biocarta)$result.table
+    eqtl.set.list=eset.list, gene.set=biocarta)$result.table
 mat=res.get.heat.mat(result, test.method = "fisher")
 draw.heatmap(mat, main="enrichment between tissue/pathway")
 }

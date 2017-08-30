@@ -12,7 +12,7 @@ query.egset.list(query.gr, query.score, eqtl.set.list, gene.set,
 
 \item{query.score}{optional, set to NULL if the regions are not ordered.}
 
-\item{eqtl.set.list}{a list of eqtlSet; each member should be an eqtlSet 
+\item{eqtl.set.list}{a list of eqtlSet; each member should be an eqtlSet
 object}
 
 \item{gene.set}{an object of geneSet class; the gene set to be tested}
@@ -24,25 +24,25 @@ default is FALSE}
 default is FALSE}
 }
 \value{
-a list; \code{result.table} is the major result table showing 
+a list; \code{result.table} is the major result table showing
 enrichment assessment;
- \code{cover.gene} is the list showing the genes from the eqtl Sets 
+ \code{cover.gene} is the list showing the genes from the eqtl Sets
  covered by the query region(s)
 }
 \description{
 This is the main function for query. The user need to specify
-- (1) Query region; if it is ordered, together with the Query score based 
+- (1) Query region; if it is ordered, together with the Query score based
 on which the regions are ranked
 - (2) eQTL set list; this is usually more than one eQTL set.
-      Only multiple eQTL set derived from different cells/tissues will 
+      Only multiple eQTL set derived from different cells/tissues will
       show cell/tissue specificity
 - (3) gene set; the gene sets that enrichment tests would be performed to.
 }
 \examples{
-result=query.egset.list(query.gr=query.gr, query.score=NULL,
-  eqtl.set.list=eset.list, gene.set=biocarta)
+result = uery.egset.list(query.gr=query.gr, query.score=NULL,
+    eqtl.set.list=eset.list, gene.set=biocarta)
 #enrichment result table
-result$result.table   
+result$result.table
 #all the genes associated with eQTLs covered by the query region
 result$cover.gene
 }

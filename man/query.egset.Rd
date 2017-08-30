@@ -19,9 +19,9 @@ query.egset(query.gr, query.score, eqtl.set, gene.set, verbose = FALSE)
 default is FALSE}
 }
 \value{
-a list; \code{result.table} is the major result table showing 
+a list; \code{result.table} is the major result table showing
 enrichment assessment;
- \code{cover.gene} is the vector showing the genes from the eqtl Sets 
+ \code{cover.gene} is the vector showing the genes from the eqtl Sets
  covered by the query region(s)
 }
 \description{
@@ -35,11 +35,11 @@ skin.eset=eset.list$Skin
 res.one=query.egset(
   query.gr=query.gr,
   query.score=NULL,
-  eqtl.set=skin.eset, 
+  eqtl.set=skin.eset,
   gene.set=biocarta
 )
 #enrichment result table
-res.one$result.table   
+res.one$result.table
 #all the genes associated with eQTLs covered by the query region
 res.one$cover.gene
 }

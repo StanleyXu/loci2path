@@ -9,17 +9,17 @@ res.get.tissue.degree(res, eqtl.set.list)
 \arguments{
 \item{res}{query result from function query.egset.list()}
 
-\item{eqtl.set.list}{a list of eqtlSet; each member should be an eqtlSet 
+\item{eqtl.set.list}{a list of eqtlSet; each member should be an eqtlSet
 object}
 }
 \value{
-a list; \code{gene.tissue.map} shows mapping:gene<->tissue; 
+a list; \code{gene.tissue.map} shows mapping:gene<->tissue;
 \code{gene.tissue.degree} shows tissue degree for each gene;
 \code{mean.tissue.degree} shows the average tissue digree for each pathway
  in the result table
 }
 \description{
-This function extracts the tissue degree from eQTL list query result for 
+This function extracts the tissue degree from eQTL list query result for
 each pathway.
 }
 \examples{

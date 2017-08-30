@@ -22,14 +22,14 @@ eqtlSet Class contains information for eqtl-gene association,
 }}
 
 \examples{
-brain.file=system.file("extdata", "eqtl/brain.gtex.txt", 
-  package = "loci2path")
-tab=read.table(brain.file, stringsAsFactors = FALSE, header = TRUE)
-snp.gr=GRanges(seqnames=Rle(tab$snp.chr), 
-  ranges=IRanges(start=tab$snp.pos, 
-   width=1))
-brain.eset=eqtlSet(tissue="brain",
-  snp.id=tab$snp.id,
-  snp.gr=snp.gr,
-  gene=as.character(tab$gene.entrez.id))
+brain.file = system.file("extdata", "eqtl/brain.gtex.txt", 
+    package = "loci2path")
+tab = read.table(brain.file, stringsAsFactors = FALSE, header = TRUE)
+snp.gr = GRanges(seqnames = Rle(tab$snp.chr), 
+    ranges=IRanges(start=tab$snp.pos, 
+    width=1))
+brain.eset = eqtlSet(tissue="brain",
+    snp.id=tab$snp.id,
+    snp.gr=snp.gr,
+    gene=as.character(tab$gene.entrez.id))
 }
