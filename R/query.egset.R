@@ -75,7 +75,7 @@ query.egset = function(query.gr,
         over.j.gene[, i] = is.element(gg, gs[[i]])
     }
     ix = match(eqtl.set@gene[over.all$subjectHits], gg)
-    over.j.snp = over.j.gene[ix, ]
+    over.j.snp = over.j.gene[ix, , drop = FALSE]
     ## calculate snp.j: # eQTL snps associated with each pathway, match
     ## eqtl-gene-pathway,
     gg = unique(eqtl.set@gene)  #find unique gene ids
