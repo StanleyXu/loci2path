@@ -1,3 +1,4 @@
+#' @include allGenerics.R
 #' eqtlSet Class
 #'
 #' eqtlSet Class contains information for eqtl-gene association,
@@ -10,6 +11,7 @@
 #'
 #' @name eqtlSet-class
 #' @rdname eqtlSet-class
+#' @import GenomicRanges
 #' @exportClass eqtlSet
 #' @examples
 #' brain.file = system.file("extdata", "eqtl/brain.gtex.txt", 
@@ -31,6 +33,23 @@ eqtlSet <- setClass(
         gene = "character"
     )
 )
+
+#' @rdname eqtlSet-class
+#' @aliases tissue, eqtlSet-method
+setMethod("tissue", "eqtlSet", function(x) x@tissue)
+
+#' @rdname eqtlSet-class
+#' @aliases eqtlId, eqtlSet-method
+setMethod("eqtlId", "eqtlSet", function(x) x@snp.id)
+
+#' @rdname eqtlSet-class
+#' @aliases eqtlRange, eqtlSet-method
+setMethod("eqtlRange", "eqtlSet", function(x) x@snp.gr)
+
+#' @rdname eqtlSet-class
+#' @aliases eqtlGene, eqtlSet-method
+setMethod("eqtlGene", "eqtlSet", function(x) x@gene)
+
 
 
 #' geneSet Class
@@ -69,3 +88,13 @@ geneSet <- setClass(
         gene.set = "list"
     )
 )
+
+
+
+setMethod("numGene", "geneSet", function(x) x@total.number.gene)
+
+
+setMethod("description", "geneSet", function(x) x@description)
+
+
+setMethod("geneSetList", "geneSet", function(x) x@gene.set)

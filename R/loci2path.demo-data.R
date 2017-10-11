@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' data(loci2path.demo)
-#' @export
+
 "eset.list"
 
 
@@ -46,7 +46,7 @@
 #'
 #' @examples
 #' data(loci2path.demo)
-#' @export
+
 "biocarta"
 
 #' eQTL geneset enrichment query demo data
@@ -70,5 +70,5 @@
 #'
 #' @examples
 #' data(loci2path.demo)
-#' @export
+
 "query.gr"
