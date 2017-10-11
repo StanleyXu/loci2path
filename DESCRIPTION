@@ -17,14 +17,15 @@ Imports: gam, pheatmap, wordcloud, RColorBrewer, data.table, methods,
     grDevices, stats, graphics, GenomicRanges, BiocParallel, GenomeInfoDb
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.0.1
 biocViews: FunctionalGenomics, Genetics, GeneSetEnrichment, Software, 
     GeneExpression, Sequencing, Coverage, BioCarta
 URL: https://github.com/StanleyXu/loci2path
 BugReports: https://github.com/StanleyXu/loci2path/issues
 Collate: 
-    'allGenerics.R'
     'allClasses.R'
+    'allGenerics.R'
+    'allAccessor.R'
     'check.geneid.R'
     'draw.heatmap.R'
     'draw.pval.distribution.R'
