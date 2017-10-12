@@ -50,6 +50,7 @@ eqtlSet Class contains information for eqtl-gene association,
 }}
 
 \examples{
+library(GenomicRanges)
 brain.file <- system.file("extdata", "eqtl/brain.gtex.txt", 
     package="loci2path")
 tab <- read.table(brain.file, stringsAsFactors=FALSE, header=TRUE)

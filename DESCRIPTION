@@ -14,7 +14,7 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.4)
 Imports: pheatmap, wordcloud, RColorBrewer, data.table, methods, 
-    grDevices, stats, graphics, GenomicRanges, BiocParallel
+    grDevices, stats, graphics, GenomicRanges, BiocParallel, GenomeInfoDb
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
