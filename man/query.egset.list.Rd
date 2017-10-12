@@ -39,7 +39,7 @@ on which the regions are ranked
 - (3) gene set; the gene sets that enrichment tests would be performed to.
 }
 \examples{
-result = query.egset.list(query.gr=query.gr, query.score=NULL,
+result <- query.egset.list(query.gr=query.gr, query.score=NULL,
     eqtl.set.list=eset.list, gene.set=biocarta)
 #enrichment result table
 result$result.table

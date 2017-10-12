@@ -31,8 +31,8 @@ tissues/cell lines of the eQTL sets. P-Values from enrichment tests are
 summarized in this matrix
 }
 \examples{
-result=query.egset.list(query.gr=query.gr, query.score=NULL,
+result <- query.egset.list(query.gr=query.gr, query.score=NULL,
   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
-mat=res.get.heat.mat(result, test.method = "fisher")
+mat <- res.get.heat.mat(result, test.method="fisher")
 }
 \keyword{result}

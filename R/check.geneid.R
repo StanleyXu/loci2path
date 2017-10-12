@@ -8,10 +8,10 @@
 #' @export
 #' @examples
 #' check.geneid(eset.list$Skin, biocarta)
-check.geneid = function(e.set, g.set) {
-    eid = unique(e.set@gene)
-    gid = unique(unlist(g.set@gene.set))
-    res = c(length(eid), length(gid), length(intersect(eid, gid)))
-    names(res) = c("eqtl.Set", "gene.Set", "common")
+check.geneid <- function(e.set, g.set) {
+    eid <- unique(eqtlGene(e.set))
+    gid <- unique(unlist(geneSetList(g.set)))
+    res <- c(length(eid), length(gid), length(intersect(eid, gid)))
+    names(res) <- c("eqtl.Set", "gene.Set", "common")
     res
 }

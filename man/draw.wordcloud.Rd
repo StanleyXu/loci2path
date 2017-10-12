@@ -26,10 +26,10 @@ This function draw the enrichment heatmap to a specific file using
 \code{pheatmap} package.
 }
 \examples{
-result=query.egset.list(query.gr=query.gr, query.score=NULL,
+result <- query.egset.list(query.gr=query.gr, query.score=NULL,
   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
-mat=res.get.heat.mat(result, test.method = "fisher")
-draw.wordcloud(result, min.freq.tissue = 2, min.freq.gset = 1)
+mat <- res.get.heat.mat(result, test.method="fisher")
+draw.wordcloud(result, min.freq.tissue=2, min.freq.gset=1)
 }
 \keyword{cloud}
 \keyword{word}

@@ -20,56 +20,54 @@
 #' enrichment assessment;
 #'  \code{cover.gene} is the list showing the genes from the eqtl Sets
 #'  covered by the query region(s)
+#' @import BiocParallel
 #' @export
 #' @examples
-#' result = query.egset.list(query.gr=query.gr, query.score=NULL,
+#' result <- query.egset.list(query.gr=query.gr, query.score=NULL,
 #'     eqtl.set.list=eset.list, gene.set=biocarta)
 #' #enrichment result table
 #' result$result.table
 #' #all the genes associated with eQTLs covered by the query region
 #' result$cover.gene
-query.egset.list = function(query.gr,
+query.egset.list <- function(query.gr,
                             query.score,
                             eqtl.set.list,
                             gene.set,
-                            parallel = FALSE,
-                            verbose = FALSE) {
-    ts = names(eqtl.set.list)
-    tl = length(ts)
+                            parallel=FALSE,
+                            verbose=FALSE) {
+    ts <- names(eqtl.set.list)
+    tl <- length(ts)
     cat(paste0("Start query: ", tl, " eqtl Sets...\n"))
     
     if (parallel) {
         cat("Run in parallel mode...\n")
-        res.list = bplapply(
+        res.list <- bplapply(
             eqtl.set.list,
-            FUN = function(x)
+            FUN=function(x)
                 query.egset(query.gr, query.score, x, gene.set, verbose),
-            BPPARAM = MulticoreParam()
+            BPPARAM=MulticoreParam()
         )
-        res = do.call(rbind, sapply(res.list, "[", 1))
-        res = cbind(tissue = rep(ts, sapply(
-            res.list,
-            FUN = function(x)
-                nrow(x$result.table)
-        )),
-        res)
-        res.gene = sapply(res.list, "[", 2)
+        res <- do.call(rbind, sapply(res.list, "[", 1))
+        res <- cbind(tissue=rep(ts, sapply(res.list,
+            FUN=function(x) nrow(x$result.table))),
+            res)
+        res.gene <- sapply(res.list, "[", 2)
     } else{
-        res = NULL
-        res.gene = list()
-        for (i in 1:tl) {
+        res <- NULL
+        res.gene <- list()
+        for (i in seq_len(tl)) {
             cat(paste0(i, " of ", tl, ": ", ts[i], "...\n"))
-            one.t = query.egset(
-                query.gr = query.gr,
-                query.score = query.score,
-                eqtl.set = eqtl.set.list[[i]],
-                gene.set = gene.set
+            one.t <- query.egset(
+                query.gr=query.gr,
+                query.score=query.score,
+                eqtl.set=eqtl.set.list[[i]],
+                gene.set=gene.set
             )
             if (nrow(one.t$result.table) > 0) {
-                res = rbind(res,
-                            data.frame(tissue = ts[i], one.t$result.table))
+                res <- rbind(res,
+                            data.frame(tissue=ts[i], one.t$result.table))
             }
-            res.gene[[ts[i]]] = one.t$cover.gene
+            res.gene[[ts[i]]] <- one.t$cover.gene
         }
     }
     
@@ -81,12 +79,12 @@ query.egset.list = function(query.gr,
     #reorder res
     if (sum(is.na(res$pval_lr)) == 0) {
         ## sort by lr p-value
-        res = res[order(res$pval_lr),]
+        res <- res[order(res$pval_lr),]
     } else{
-        res = res[order(res$pval_fisher_gene),]
+        res <- res[order(res$pval_fisher_gene),]
     }
-    rownames(res) = NULL
+    rownames(res) <- NULL
     cat(paste0("\ndone!\n"))
     
-    out = list(result.table = res, cover.gene = res.gene)
+    out <- list(result.table=res, cover.gene=res.gene)
 }

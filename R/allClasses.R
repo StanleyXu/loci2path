@@ -4,53 +4,51 @@
 #'  gene identifier, position of SNPs, etc.
 #'
 #' @slot tissue character; name of the cell/tissue of the eQTL study
-#' @slot snp.id character; name of the SNPs
-#' @slot snp.gr GenomicRanges; position of the SNPs
+#' @slot eqtlId character; name of the SNPs
+#' @slot eqtlRange GenomicRanges; position of the SNPs
 #' @slot gene character; gene identifier
 #'
 #' @name eqtlSet-class
 #' @rdname eqtlSet-class
 #' @import GenomicRanges
+#' @importFrom methods new
 #' @exportClass eqtlSet
 #' @examples
 #' brain.file <- system.file("extdata", "eqtl/brain.gtex.txt", 
 #'     package="loci2path")
 #' tab <- read.table(brain.file, stringsAsFactors=FALSE, header=TRUE)
-#' snp.gr <- GRanges(seqnames=Rle(tab$snp.chr), 
+#' eqtlRange <- GRanges(seqnames=Rle(tab$snp.chr), 
 #'     ranges=IRanges(start=tab$snp.pos, 
 #'     width=1))
 #' brain.eset <- eqtlSet(tissue="brain",
-#'     snp.id=tab$snp.id,
-#'     snp.gr=snp.gr,
+#'     eqtlId=tab$snp.id,
+#'     eqtlRange=eqtlRange,
 #'     gene=as.character(tab$gene.entrez.id))
 #' tissue(brain.eset)
 #' head(eqtlId(brain.eset))
 #' eqtlRange(brain.eset)
-#' eqtlGene(brain.eset)
+#' head(eqtlGene(brain.eset))
+#' @export eqtlSet
 eqtlSet <- setClass(
     "eqtlSet",
     slot = c(
         tissue="character",
-        snp.id="character",
-        snp.gr="GenomicRanges",
+        eqtlId="character",
+        eqtlRange="GenomicRanges",
         gene="character"
     )
 )
-
-
-
-
 
 #' geneSet Class
 #'
 #' geneSet Class contains information for names of gene sets and a list of 
 #' gene sets
 #'
-#' @slot total.number.gene numeric; the total number of all genes;
+#' @slot numGene numeric; the total number of all genes;
 #'       This number is used in enrichment tests
 #' @slot description vector of character; additional information for gene 
 #'   sets, such as names, URLs, a short description, etc.
-#' @slot gene.set list;  a list of gene sets; each member of the list is a 
+#' @slot geneSetList list;  a list of gene sets; each member of the list is a 
 #'   vector containing a group of gene identifiers
 #' @name geneSet-class
 #' @rdname geneSet-class
@@ -66,19 +64,18 @@ eqtlSet <- setClass(
 #' set.geneid <- strsplit(set.geneid[,1], split=",")
 #' names(set.geneid) <- biocarta.link[,1]
 #' biocarta <- geneSet(
-#'     gene.set=set.geneid,
+#'     geneSetList=set.geneid,
 #'     description=biocarta.link[,2],
-#'     total.number.gene=31847)
+#'     numGene=31847)
 #' numGene(biocarta)
 #' head(description(biocarta))
 #' head(geneSetList(biocarta))
+#' @export geneSet
 geneSet <- setClass(
     "geneSet",
     slot=c(
-        total.number.gene="numeric",
+        numGene="numeric",
         description="character",
-        gene.set="list"
+        geneSetList="list"
     )
 )
-
-

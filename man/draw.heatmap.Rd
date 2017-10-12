@@ -19,9 +19,9 @@ generate heatmap to graphic device and return result from calling
 This function generate the enrichment heatmap using pheatmap package.
 }
 \examples{
-result=query.egset.list(query.gr=query.gr, query.score=NULL,
+result <- query.egset.list(query.gr=query.gr, query.score=NULL,
     eqtl.set.list=eset.list, gene.set=biocarta)$result.table
-mat=res.get.heat.mat(result, test.method = "fisher")
+mat <- res.get.heat.mat(result, test.method="fisher")
 draw.heatmap(mat, main="enrichment between tissue/pathway")
 }
 \keyword{heatmap}

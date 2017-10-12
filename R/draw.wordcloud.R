@@ -10,38 +10,39 @@
 #' @param max.words maximum words to be generated
 #' @return empty
 #' @keywords word cloud
+#' @import wordcloud
 #' @export
 #' @examples
-#' result=query.egset.list(query.gr=query.gr, query.score=NULL,
+#' result <- query.egset.list(query.gr=query.gr, query.score=NULL,
 #'   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
-#' mat=res.get.heat.mat(result, test.method = "fisher")
-#' draw.wordcloud(result, min.freq.tissue = 2, min.freq.gset = 1)
-draw.wordcloud = function(result,
-                          min.freq.tissue = 5,
-                          min.freq.gset = 5,
-                          max.words = 50) {
-    pthw = sort(table(as.character(result$name_pthw)), decreasing = TRUE)
-    tissue = sort(table(as.character(result$tissue)), decreasing = TRUE)
-    par(mfrow = c(1, 2))
+#' mat <- res.get.heat.mat(result, test.method="fisher")
+#' draw.wordcloud(result, min.freq.tissue=2, min.freq.gset=1)
+draw.wordcloud <- function(result,
+                          min.freq.tissue=5,
+                          min.freq.gset=5,
+                          max.words=50) {
+    pthw <- sort(table(as.character(result$name_pthw)), decreasing=TRUE)
+    tissue <- sort(table(as.character(result$tissue)), decreasing=TRUE)
+    par(mfrow=c(1, 2))
     wordcloud(
-        words = names(pthw),
-        freq = pthw,
-        min.freq = min.freq.gset,
-        max.words = max.words,
-        random.order = FALSE,
-        rot.per = 0,
-        colors = brewer.pal(8, "Dark2"),
-        scale = c(0.8, 0.5)
+        words=names(pthw),
+        freq=pthw,
+        min.freq=min.freq.gset,
+        max.words=max.words,
+        random.order=FALSE,
+        rot.per=0,
+        colors=brewer.pal(8, "Dark2"),
+        scale=c(0.8, 0.5)
     )
     wordcloud(
-        words = names(tissue),
-        freq = tissue,
-        min.freq = min.freq.tissue,
-        max.words = max.words,
-        random.order = FALSE,
-        rot.per = 0,
-        colors = brewer.pal(8, "Dark2"),
-        scale = c(0.8, 0.5)
+        words=names(tissue),
+        freq=tissue,
+        min.freq=min.freq.tissue,
+        max.words=max.words,
+        random.order=FALSE,
+        rot.per=0,
+        colors=brewer.pal(8, "Dark2"),
+        scale=c(0.8, 0.5)
     )
-    par(mfrow = c(1, 1))
+    par(mfrow=c(1, 1))
 }

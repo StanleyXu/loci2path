@@ -28,5 +28,5 @@ need to specify
       show cell/tissue specificity
 }
 \examples{
-gr.tissue=query.tissue(query.gr, eqtl.set.list=eset.list)
+gr.tissue <- query.tissue(query.gr, eqtl.set.list=eset.list)
 }

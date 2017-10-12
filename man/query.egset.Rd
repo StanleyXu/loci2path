@@ -30,9 +30,9 @@ This function perform enrichment test between one eQTL set and a group of
 }
 \examples{
 #build one eqtlset
-skin.eset=eset.list$Skin
+skin.eset <- eset.list$Skin
 #query one egset
-res.one=query.egset(
+res.one <- query.egset(
   query.gr=query.gr,
   query.score=NULL,
   eqtl.set=skin.eset,

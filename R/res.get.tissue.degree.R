@@ -19,31 +19,31 @@
 #' head(tissue.degree$gene.tissue.map)
 #' head(tissue.degree$gene.tissue.degree)
 #' head(tissue.degree$mean.tissue.degree)
-res.get.tissue.degree = function(res, eqtl.set.list) {
-    gt = list()
-    tissues = names(eqtl.set.list)
+res.get.tissue.degree <- function(res, eqtl.set.list) {
+    gt <- list()
+    tissues <- names(eqtl.set.list)
     for (tt in tissues) {
-        eset = eqtl.set.list[[tt]]
-        gene = sort(unique(eset@gene))
-        gt[gene] = lapply(
+        eset <- eqtl.set.list[[tt]]
+        gene <- sort(unique(eqtlGene(eset)))
+        gt[gene] <- lapply(
             gt[gene],
-            FUN = function(x)
+            FUN=function(x)
                 append(x, tt)
         )
     }
     
-    gt.length = sapply(gt, length)
+    gt.length <- sapply(gt, length)
     
-    gg = res$gene_hit
-    mean.tissue = rep(NA, nrow(res))
+    gg <- res$gene_hit
+    mean.tissue <- rep(NA, nrow(res))
     for (i in 1:length(gg)) {
-        gl = strsplit(gg[i], split = ";")[[1]]
-        mean.tissue[i] = mean(gt.length[gl])
+        gl <- strsplit(gg[i], split=";")[[1]]
+        mean.tissue[i] <- mean(gt.length[gl])
     }
-    res = list(
-        gene.tissue.map = gt,
-        gene.tissue.degree = gt.length,
-        mean.tissue.degree = mean.tissue
+    res <- list(
+        gene.tissue.map=gt,
+        gene.tissue.degree=gt.length,
+        mean.tissue.degree=mean.tissue
     )
     res
 }

@@ -22,7 +22,7 @@ This function extracts the enrichment p-value distribution from eQTL list
  and QQ-plot is generated against uniform distribution
 }
 \examples{
-result=query.egset.list(query.gr=query.gr, query.score=NULL,
+result <- query.egset.list(query.gr=query.gr, query.score=NULL,
   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
 draw.pval.distribution(result, test.method="fisher")
 }

@@ -1,14 +1,35 @@
-## eqtlSet-class accessor
-
 #' @include allClasses.R allGenerics.R
 
+
+
+## eqtlSet-class accessor
+
+#' @param x An eqtlSet object
+
+
+#' @rdname eqtlSet-class
+#' @aliases tissue,eqtlSet-method
 setMethod("tissue", "eqtlSet", function(x) x@tissue)
-setMethod("eqtlId", "eqtlSet", function(x) x@snp.id)
-setMethod("eqtlRange", "eqtlSet", function(x) x@snp.gr)
+#' @rdname eqtlSet-class
+#' @aliases eqtlId,eqtlSet-method
+setMethod("eqtlId", "eqtlSet", function(x) x@eqtlId)
+#' @rdname eqtlSet-class
+#' @aliases eqtlRange,eqtlSet-method
+setMethod("eqtlRange", "eqtlSet", function(x) x@eqtlRange)
+#' @rdname eqtlSet-class
+#' @aliases eqtlGene,eqtlSet-method
 setMethod("eqtlGene", "eqtlSet", function(x) x@gene)
 
 ## geneSet-class accessor
 
-setMethod("numGene", "geneSet", function(x) x@total.number.gene)
+#' @param x An geneSet object
+
+#' @rdname geneSet-class
+#' @aliases numGene,geneSet-method
+setMethod("numGene", "geneSet", function(x) x@numGene)
+#' @rdname geneSet-class
+#' @aliases description,geneSet-method
 setMethod("description", "geneSet", function(x) x@description)
-setMethod("geneSetList", "geneSet", function(x) x@gene.set)
+#' @rdname geneSet-class
+#' @aliases geneSetList,geneSet-method
+setMethod("geneSetList", "geneSet", function(x) x@geneSetList)

@@ -17,47 +17,47 @@
 #' @keywords result
 #' @export
 #' @examples
-#' result=query.egset.list(query.gr=query.gr, query.score=NULL,
+#' result <- query.egset.list(query.gr=query.gr, query.score=NULL,
 #'   eqtl.set.list=eset.list, gene.set=biocarta)$result.table
-#' mat=res.get.heat.mat(result, test.method = "fisher")
-res.get.heat.mat = function(res,
-                            test.method = c("glm", "fisher"),
-                            filter.quantile = 0.5,
-                            min.ptw.gene = 30) {
+#' mat <- res.get.heat.mat(result, test.method="fisher")
+res.get.heat.mat <- function(res,
+                            test.method=c("glm", "fisher"),
+                            filter.quantile=0.5,
+                            min.ptw.gene=30) {
     # if(nrow(res)>1000){
     #   res=subset(res, genes_pthw>min.ptw.gene)
     # }
-    test.method = match.arg(test.method)
+    test.method <- match.arg(test.method)
     if (test.method == "glm") {
-        pval = res$pval_lr
+        pval <- res$pval_lr
     } else if (test.method == "fisher") {
-        pval = res$pval_fisher_gene
+        pval <- res$pval_fisher_gene
     }
-    tissue = res$tissue
-    gene = res$name_pthw
+    tissue <- res$tissue
+    gene <- res$name_pthw
     # filter by quantile
-    ix = which(pval <= quantile(pval, filter.quantile))
-    pval = pval[ix]
-    tissue = tissue[ix]
-    gene = gene[ix]
-    uni.tissue = unique(tissue)
-    uni.gene = unique(gene)
-    mat = matrix(1,
-                 ncol = length(uni.tissue),
-                 nrow = length(uni.gene))
-    rownames(mat) = uni.gene
-    colnames(mat) = uni.tissue
-    for (i in 1:length(pval)) {
-        mat[as.character(gene[i]), as.character(tissue[i])] = pval[i]
+    ix <- which(pval <= quantile(pval, filter.quantile))
+    pval <- pval[ix]
+    tissue <- tissue[ix]
+    gene <- gene[ix]
+    uni.tissue <- unique(tissue)
+    uni.gene <- unique(gene)
+    mat <- matrix(1,
+                 ncol=length(uni.tissue),
+                 nrow=length(uni.gene))
+    rownames(mat) <- uni.gene
+    colnames(mat) <- uni.tissue
+    for (i in seq_len(length(pval))) {
+        mat[as.character(gene[i]), as.character(tissue[i])] <- pval[i]
     }
     #reorder pthw by avg.pval, row
     if (length(uni.gene) > 1) {
-        rs = rowSums(mat)
-        mat = mat[order(rs), ]
+        rs <- rowSums(mat)
+        mat <- mat[order(rs), ]
     }
     #reorder tissue by avg.pval, col
-    cs = colSums(mat)
-    mat = mat[, order(cs)]
+    cs <- colSums(mat)
+    mat <- mat[, order(cs)]
     
     mat
 }

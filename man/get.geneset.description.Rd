@@ -19,7 +19,7 @@ slot
 This function extracts the gene set description from geneSet object.
 }
 \examples{
-query.result=query.egset.list(query.gr=query.gr, query.score=NULL,
+query.result <- query.egset.list(query.gr=query.gr, query.score=NULL,
   eqtl.set.list=eset.list, gene.set=biocarta)
 head(query.result$result.table)
 query.result$cover.gene

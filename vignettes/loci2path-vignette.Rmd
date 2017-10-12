@@ -83,8 +83,8 @@ snp.gr=GRanges(seqnames=Rle(tab$snp.chr),
   ranges=IRanges(start=tab$snp.pos, 
   width=1))
 brain.eset=eqtlSet(tissue="brain",
-  snp.id=tab$snp.id,
-  snp.gr=snp.gr,
+  eqtlId=tab$snp.id,
+  eqtlRange=snp.gr,
   gene=as.character(tab$gene.entrez.id))
 brain.eset
 
@@ -94,8 +94,8 @@ snp.gr=GRanges(seqnames=Rle(tab$snp.chr),
   ranges=IRanges(start=tab$snp.pos, 
   width=1))
 skin.eset=eqtlSet(tissue="skin",
-  snp.id=tab$snp.id,
-  snp.gr=snp.gr,
+  eqtlId=tab$snp.id,
+  eqtlRange=snp.gr,
   gene=as.character(tab$gene.entrez.id))
 skin.eset
 
@@ -106,8 +106,8 @@ snp.gr=GRanges(seqnames=Rle(tab$snp.chr),
   ranges=IRanges(start=tab$snp.pos, 
   width=1))
 blood.eset=eqtlSet(tissue="blood",
-  snp.id=tab$snp.id,
-  snp.gr=snp.gr,
+  eqtlId=tab$snp.id,
+  eqtlRange=snp.gr,
   gene=as.character(tab$gene.entrez.id))
 blood.eset
 ```
@@ -151,9 +151,9 @@ MSigDB pathway collection is 31,847[@Liberzon2015]
 ```{r}
 #build geneSet
 biocarta=geneSet(
-  gene.set=set.geneid,
-  description=biocarta.link[,2],
-  total.number.gene=31847)
+    numGene=31847,
+    description=biocarta.link[,2],
+    geneSetList=set.geneid)
 biocarta
 ```
 
