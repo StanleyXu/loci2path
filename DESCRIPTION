@@ -13,8 +13,8 @@ License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.4)
-Imports: gam, pheatmap, wordcloud, RColorBrewer, data.table, methods, 
-    grDevices, stats, graphics, GenomicRanges, BiocParallel, GenomeInfoDb
+Imports: pheatmap, wordcloud, RColorBrewer, data.table, methods, 
+    grDevices, stats, graphics, GenomicRanges, BiocParallel
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

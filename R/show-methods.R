@@ -5,7 +5,8 @@ setMethod(
         cat("An object of class ", class(object), "\n", sep = "")
         cat(" eQTL collected from tissue:", tissue(object), "\n")
         cat(" number of eQTLs:", length(eqtlId(object)), "\n")
-        cat(" number of associated genes:", length(unique(eqtlGene(object))), "\n")
+        cat(" number of associated genes:", length(unique(eqtlGene(object))),
+            "\n")
     }
 )
 setMethod(

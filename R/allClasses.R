@@ -48,7 +48,7 @@ eqtlSet <- setClass(
 #'       This number is used in enrichment tests
 #' @slot description vector of character; additional information for gene 
 #'   sets, such as names, URLs, a short description, etc.
-#' @slot geneSetList list;  a list of gene sets; each member of the list is a 
+#' @slot geneSetList list;  a list of gene sets; each member is a 
 #'   vector containing a group of gene identifiers
 #' @name geneSet-class
 #' @rdname geneSet-class

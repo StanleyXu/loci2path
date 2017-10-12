@@ -40,7 +40,7 @@ This number is used in enrichment tests}
 \item{\code{description}}{vector of character; additional information for gene 
 sets, such as names, URLs, a short description, etc.}
 
-\item{\code{geneSetList}}{list;  a list of gene sets; each member of the list is a 
+\item{\code{geneSetList}}{list;  a list of gene sets; each member is a 
 vector containing a group of gene identifiers}
 }}
 
