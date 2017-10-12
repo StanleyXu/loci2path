@@ -76,6 +76,7 @@ to 3000 records for demostration purpose.
 ### construct eQTL set
 ```{r eset}
 library(loci2path)
+library(GenomicRanges)
 brain.file=system.file("extdata", "eqtl/brain.gtex.txt", 
                        package = "loci2path")
 tab=read.table(brain.file, stringsAsFactors = FALSE, header = TRUE)

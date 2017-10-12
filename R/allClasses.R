@@ -14,6 +14,7 @@
 #' @importFrom methods new
 #' @exportClass eqtlSet
 #' @examples
+#' library(GenomicRanges)
 #' brain.file <- system.file("extdata", "eqtl/brain.gtex.txt", 
 #'     package="loci2path")
 #' tab <- read.table(brain.file, stringsAsFactors=FALSE, header=TRUE)
