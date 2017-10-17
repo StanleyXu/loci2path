@@ -21,3 +21,14 @@ setMethod(
         }
     }
 )
+setMethod(
+    "show",
+    signature = "loci2pathResult",
+    definition = function(object) {
+        cat("An object of class ", class(object), "\n", sep = "")
+        cat("Number of eQTL tissue(s): ", length(coveredGene(object)), "\n")
+        cat("Number of enriched pathway:", nrow(resultTable(object)), "\n")
+        rr=range(resultTable(object)$pval_fisher_gene)
+        cat("  p-val range: ", rr[1], "~", rr[2], "\n" )
+    }
+)

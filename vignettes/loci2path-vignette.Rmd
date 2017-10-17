@@ -2,8 +2,8 @@
 title: "Loci2path: regulatory annotation of genomic intervals based on
   tissue-specific expression QTLs"
 author: "Tianlei Xu"
-date: "`r doc_date()`"
-package: "`r pkg_ver('loci2path')`"
+date: "`r BiocStyle::doc_date()`"
+package: "`r BiocStyle::pkg_ver('loci2path')`"
 abstract: > 
   Annotating a given genomic locus or a set of genomic loci is an important
   yet challenging task. This is especially true for the non-coding part of the
@@ -164,11 +164,10 @@ biocarta
 ## peroform query from one eQTL set
 ```{r}
 #query from one eQTL set.
-res.one=query.egset(
+res.one=query(
   query.gr=query.gr,
-  query.score=NULL,
-  eqtl.set=skin.eset, 
-  gene.set=biocarta)
+  loci=skin.eset, 
+  path=biocarta)
 
 #enrichment result table
 res.one$result.table
@@ -180,28 +179,26 @@ res.one$cover.gene
 ## peroform query from multiple eQTL sets 
 ```{r}
 #query from one eQTL set.
-res.esetlist=query.egset.list(
+res.esetlist=query(
   query.gr=query.gr, 
-  query.score=NULL, 
-  eqtl.set.list=eset.list, 
-  gene.set=biocarta)  
+  loci=eset.list, 
+  path=biocarta)  
 
 #enrichment result table, tissue column added
-res.esetlist$result.table
+resultTable(res.esetlist)
 
 #all the genes associated with eQTLs covered by the query region; 
 #names of the list are tissue names from eqtl set list
-res.esetlist$cover.gene
+coveredGene(res.esetlist)
 ```
 
 ## parallel query from multiple eQTL sets
 ```{r}
 #query from one eQTL set.
-res.paral = query.egset.list(
+res.paral = query(
   query.gr = query.gr, 
-  query.score = NULL, 
-  eqtl.set.list = eset.list, 
-  gene.set = biocarta, 
+  loci = eset.list, 
+  path = biocarta, 
   parallel = TRUE)  
 #should return the same result as res.esetlist
 ```
@@ -211,7 +208,7 @@ res.paral = query.egset.list(
 
 # explore query result
 ```{r}
-result=res.esetlist$result.table
+result=resultTable(res.esetlist)
 ```
 
 
@@ -223,7 +220,7 @@ res.one$cover.gene
 
 #all the genes associated with eQTLs covered by the query region; 
 #names of the list are tissue names from eqtl set list
-res.esetlist$cover.gene
+coveredGene(res.esetlist)
 ```
 
 
@@ -232,9 +229,7 @@ res.esetlist$cover.gene
 
 ## obtain average tissue degree for each pathway
 ```{r}
-tissue.degree=res.get.tissue.degree(
-  result, 
-  eset.list)
+tissue.degree=getTissueDegree(res.esetlist, eset.list)
 
 #check gene-tissue mapping for each gene
 head(tissue.degree$gene.tissue.map)
@@ -246,16 +241,18 @@ head(tissue.degree$gene.tissue.degree)
 tissue.degree$mean.tissue.degree
 
 #add avg. tissue degree to existing result table
-res.tissue=data.frame(res.esetlist$result.table,
+res.tissue=data.frame(resultTable(res.esetlist),
                       t.degree=tissue.degree$mean.tissue.degree)
 ```
 
 
 ## obtain tissue enrichment for query regions
-
+In this case, in the generic function \code{query}, only the argunment
+\code{loci} need to be provided. This will trigger the query of tissue
+specificity
 ```{r}
 #query tissue specificity
-gr.tissue=query.tissue(query.gr, eqtl.set.list=eset.list)
+gr.tissue <- query(query.gr, loci=eset.list)
 gr.tissue
 ```
 
@@ -263,10 +260,10 @@ gr.tissue
 ## extract tissue-pathway heatmap
 ```{r}
 #extract tissue-pathway matrix
-mat=res.get.heat.mat(result, test.method = "fisher")
+mat <- getMat(res.esetlist, test.method = "gene")
 
 #plot heatmap
-draw.heatmap(mat)
+heatmap.para <- getHeatmap(res.esetlist)
 ```
 
 
@@ -274,20 +271,20 @@ draw.heatmap(mat)
 ```{r}
 
 #plot word cloud
-draw.wordcloud(result)
+wc <- getWordcloud(res.esetlist)
 ```
 
 ##plot p-value distribution of result
 ```{r}
 #plot p-value distribution of result
-draw.pval.distribution(result, test.method="fisher")
+pval <- getPval(res.esetlist, test.method="gene")
 ```
 
 
 ##obtain geneset description from object
 ```{r}
 #obtain geneset description from object
-description=get.geneset.description(biocarta, geneset.ids=result$name_pthw)
+description <- getPathDescription(res.esetlist, biocarta)
 head(description)
 ```
 

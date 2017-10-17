@@ -2,7 +2,7 @@ Package: loci2path
 Type: Package
 Title: Loci2path: regulatory annotation of genomic intervals based on 
     tissue-specific expression QTLs
-Version: 0.99.3
+Version: 0.99.4
 Author: Tianlei Xu
 Maintainer: Tianlei Xu <tianlei.xu@emory.edu>
 Description: loci2path performs statistics-rigorous enrichment analysis 
@@ -14,7 +14,7 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.4)
 Imports: pheatmap, wordcloud, RColorBrewer, data.table, methods, 
-    grDevices, stats, graphics, GenomicRanges, BiocParallel, GenomeInfoDb
+    grDevices, stats, graphics, GenomicRanges, BiocParallel, S4Vectors
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
@@ -27,14 +27,7 @@ Collate:
     'allGenerics.R'
     'allAccessor.R'
     'check.geneid.R'
-    'draw.heatmap.R'
-    'draw.pval.distribution.R'
-    'draw.wordcloud.R'
-    'get.geneset.description.R'
     'loci2path.demo-data.R'
-    'query.egset.R'
-    'query.egset.list.R'
-    'query.tissue.R'
-    'res.get.heat.mat.R'
-    'res.get.tissue.degree.R'
+    'loci2pathResult-methods.R'
+    'query-methods.R'
     'show-methods.R'

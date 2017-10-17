@@ -14,7 +14,7 @@
 #' @importFrom methods new
 #' @exportClass eqtlSet
 #' @examples
-#' library(GenomicRanges)
+#' require(GenomicRanges)
 #' brain.file <- system.file("extdata", "eqtl/brain.gtex.txt", 
 #'     package="loci2path")
 #' tab <- read.table(brain.file, stringsAsFactors=FALSE, header=TRUE)
@@ -78,5 +78,37 @@ geneSet <- setClass(
         numGene="numeric",
         description="character",
         geneSetList="list"
+    )
+)
+
+
+
+
+#' loci2pathResult Class
+#'
+#' loci2pathResult Class contains information for the query result from 
+#' query function \code{query}. Result object contains a ranked
+#' pathway table, and a vector of gene names that are associated with loci 
+#' covered by query regions
+#'
+#' @slot resultTable data.frame; contains enrichment statistics, 
+#' summary of eQTL and gene numbers, pathway names and gene names, etc.
+#' @slot coveredGene list; each member is a vector of genes associated 
+#' with one tissue, whose associating loci are covered by query regions
+#' @name loci2pathResult-class
+#' @rdname loci2pathResult-class
+#' @exportClass loci2pathResult
+#' @examples
+#' result <- query(query.gr=query.gr, 
+#'   loci=eset.list, path=biocarta)
+#' result
+#' resultTable(result) # a data.frame for enriched pathways
+#' coveredGene(result)  
+#' @export loci2pathResult
+loci2pathResult <- setClass(
+    "loci2pathResult",
+    slot=c(
+        resultTable="data.frame",
+        coveredGene="list"
     )
 )

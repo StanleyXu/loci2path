@@ -27,6 +27,9 @@ geneSetList(x)
 \arguments{
 \item{x}{An geneSet object}
 }
+\value{
+Object of class geneSet
+}
 \description{
 geneSet Class contains information for names of gene sets and a list of 
 gene sets

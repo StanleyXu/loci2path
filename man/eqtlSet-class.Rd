@@ -33,6 +33,9 @@ eqtlGene(x)
 \arguments{
 \item{x}{An eqtlSet object}
 }
+\value{
+Object of class eqtlSet
+}
 \description{
 eqtlSet Class contains information for eqtl-gene association,
  gene identifier, position of SNPs, etc.
@@ -50,7 +53,7 @@ eqtlSet Class contains information for eqtl-gene association,
 }}
 
 \examples{
-library(GenomicRanges)
+require(GenomicRanges)
 brain.file <- system.file("extdata", "eqtl/brain.gtex.txt", 
     package="loci2path")
 tab <- read.table(brain.file, stringsAsFactors=FALSE, header=TRUE)
