@@ -1,6 +1,7 @@
----
+
 
 # loci2path
+
   Annotating a given genomic locus or a set of genomic loci is an important
   yet challenging task. This is especially true for the non-coding part of the
   genome which is enormous yet poorly understood. Since gene set enrichment
@@ -19,7 +20,6 @@
   shown to be unreliable; second, eQTL allows us to provide the regulatory
   annotation under the context of specific tissue types which is important.
   
----
 
 
 # Install
