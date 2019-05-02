@@ -16,10 +16,10 @@ query(query.gr, loci, path, ...)
 \S4method{query}{GenomicRanges,list,ANY}(query.gr, loci, N = 2897310462)
 
 \S4method{query}{GenomicRanges,eqtlSet,geneSet}(query.gr, loci, path,
-  query.score = NULL, verbose = FALSE)
+  verbose = FALSE, permutation = FALSE)
 
 \S4method{query}{GenomicRanges,list,geneSet}(query.gr, loci, path,
-  query.score = NULL, parallel = FALSE, verbose = FALSE)
+  parallel = FALSE, verbose = FALSE, permutation = FALSE)
 }
 \arguments{
 \item{query.gr}{a GenomicRange object, representing query regions}
@@ -34,11 +34,10 @@ Or it can be a single eqtlSet.}
 \item{N}{the total number of non-N nucleotides in the genome;
 default N=2897310462 is for hg19}
 
-\item{query.score}{optional, set to NULL if the regions are not ordered.
-If the query regions are ordered,  query.score is the quantity based
-on which the regions are ordered}
-
 \item{verbose}{bool; whether to show eqtlSet/geneSet summary information;
+default is FALSE}
+
+\item{permutation}{bool; whether to calculate rank-based permutation;
 default is FALSE}
 
 \item{parallel}{bool; whether to enable parallel computing;

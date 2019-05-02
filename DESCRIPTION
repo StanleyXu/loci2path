@@ -2,7 +2,7 @@ Package: loci2path
 Type: Package
 Title: Loci2path: regulatory annotation of genomic intervals based on 
     tissue-specific expression QTLs
-Version: 0.99.6
+Version: 1.3.1
 Author: Tianlei Xu
 Maintainer: Tianlei Xu <tianlei.xu@emory.edu>
 Description: loci2path performs statistics-rigorous enrichment analysis 
@@ -17,7 +17,7 @@ Imports: pheatmap, wordcloud, RColorBrewer, data.table, methods,
     grDevices, stats, graphics, GenomicRanges, BiocParallel, S4Vectors
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 biocViews: FunctionalGenomics, Genetics, GeneSetEnrichment, Software, 
     GeneExpression, Sequencing, Coverage, BioCarta
 URL: https://github.com/StanleyXu/loci2path

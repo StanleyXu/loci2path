@@ -1,1 +1,10 @@
+loci2path v1.3.1 
+==============
+
+Changes:
+
+* add rank-based permutation test for FDR control
+
+loci2path v1.0.0 
+==============
 FIRST SUBMITTION OF 'loci2path'

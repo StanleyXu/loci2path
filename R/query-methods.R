@@ -35,9 +35,6 @@
 #' @param loci a list of eqtlSet; each member should be an eqtlSet;
 #' Or it can be a single eqtlSet.
 #' @param path Pathways or geneSets to be tested for enrichment
-#' @param query.score optional, set to NULL if the regions are not ordered.
-#' If the query regions are ordered,  query.score is the quantity based
-#' on which the regions are ordered
 #' @param \dots additional params
 
 
@@ -104,6 +101,8 @@ setMethod("query", signature = c(query.gr="GenomicRanges", loci="list"),
 
 #' @rdname query-methods
 #' @aliases query,eqtlSet,geneSet-method
+#' @param permutation bool; whether to calculate rank-based permutation;
+#' default is FALSE
 #' @return a list; \code{result.table} is the major result table showing
 #' enrichment assessment;
 #'  \code{cover.gene} is the vector showing the genes from the eqtl Sets
@@ -126,8 +125,8 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
           function(query.gr,
                    loci,
                    path,
-                   query.score=NULL,
-                   verbose=FALSE){
+                   verbose=FALSE,
+                   permutation=FALSE){
     eqtl.set=loci
     gene.set=path
     ## check gene id compatibility
@@ -193,6 +192,30 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
                                lower.tail=FALSE)
     pval.fisher.snp <- phyper(snp.qj - 1, snp.j, snp.all - snp.j, snp.q,
                               lower.tail=FALSE)
+    
+    ## get FDR
+    padj.fisher.gene <- p.adjust(pval.fisher.gene)
+    
+    if(permutation){
+      K=1000
+      permu <- matrix(1, nrow=K, ncol=lgs)
+      for(j in 1:K){
+        #sample to get gene.q and gene.qj
+        gg2 <- sample(gg, size=gene.q)
+        over.j.gene <- matrix(FALSE, nrow=length(gg2), ncol=lgs)
+        for (i in seq_len(ncol(over.j.gene))) {
+          over.j.gene[, i] <- is.element(gg2, gs[[i]])
+        }
+        gene.qj <- colSums(over.j.gene)
+        ## get p-val
+        permu[j,] <- phyper(gene.qj - 1, gene.j, gene.all - gene.j, gene.q,
+                            lower.tail=FALSE)
+      }
+      perm.rank <- apply(permu, 1, rank)
+      res.rank <- rank(pval.fisher.gene)
+      rank.permu.pct <- rowMeans(perm.rank <= res.rank)
+    }
+    
     ## add log ratio
     snp.log.ratio <- log((snp.qj / snp.q) / (snp.j / snp.all))
     gene.log.ratio <- log((gene.qj / gene.q) / (gene.j / gene.all))
@@ -225,7 +248,6 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
         snp.qj,
         #num of eQTL associated with pathway j, overlap query
         snp.log.ratio,
-        pval.lr=NA,#need update when glm implemented
         pval.fisher.snp,
         gene.j,
         # num of gene in current geneset
@@ -238,6 +260,7 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
         gene.log.ratio,
         # log ratio based on gene numbers
         pval.fisher.gene,
+        padj.fisher.gene,
         
         stringsAsFactors=FALSE
     )
@@ -248,7 +271,6 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
         "eQTL_query",
         "eQTL_pthw_query",
         "log_ratio",
-        "pval_lr",
         "pval_fisher",
         "num_gene_set",
         #gene.j,  num of gene in current geneset
@@ -260,11 +282,15 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
         #gene.hit, # display hit gene ids
         "log_ratio_gene",
         #log.ratio.gene, # log ratio based on gene numbers
-        "pval_fisher_gene" #pval.fisher.gene
+        "pval_fisher_gene", #pval.fisher.gene
+        "padj_fisher_gene" #padj.fisher.gene
     )
+    
+    if(permutation){  # add additional column of permutation
+      res$rank_permu_pct <- rank.permu.pct
+    }
     ## remove NA
-    num_gene_hit <- NULL #simply to surpress checking note; not used
-    res <- subset(res, num_gene_hit > 0)
+    res <- res[which(res$num_gene_hit > 0),]
     
     out.res <- list(result.table=res, cover.gene=out.gene.list)
     out.res
@@ -288,7 +314,6 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
 #' @aliases query,list,geneSet-method
 #' @param parallel bool; whether to enable parallel computing;
 #' default is FALSE
-
 #' @return a \code{loci2pathResult} class object
 #' @seealso loci2pathResult
 #' @import BiocParallel
@@ -306,9 +331,9 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
           function(query.gr,
                    loci,
                    path,
-                   query.score=NULL,
                    parallel=FALSE,
-                   verbose=FALSE) {
+                   verbose=FALSE,
+                   permutation=FALSE) {
     eqtl.set.list=loci
     gene.set=path
     ts <- names(eqtl.set.list)
@@ -321,7 +346,8 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
             eqtl.set.list,
             FUN=function(x)
                 query(query.gr, loci=x, path=gene.set, 
-                      query.score=query.score, verbose=verbose),
+                      verbose=verbose,
+                      permutation=permutation),
             BPPARAM=MulticoreParam()
         )
         res <- do.call(rbind, sapply(res.list, "[", 1))
@@ -339,7 +365,7 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
                 query.gr=query.gr,
                 loci=eqtl.set.list[[i]],
                 path=gene.set,
-                query.score=query.score
+                permutation=permutation
             )
             if (nrow(one.t$result.table) > 0) {
                 res <- rbind(res,
@@ -355,12 +381,7 @@ setMethod("query", signature = c(query.gr="GenomicRanges",
     }
     
     #reorder res
-    if (sum(is.na(res$pval_lr)) == 0) {
-        ## sort by lr p-value
-        res <- res[order(res$pval_lr),]
-    } else{
-        res <- res[order(res$pval_fisher_gene),]
-    }
+    res <- res[order(res$pval_fisher_gene),]
     rownames(res) <- NULL
     cat(paste0("\ndone!\n"))
     
